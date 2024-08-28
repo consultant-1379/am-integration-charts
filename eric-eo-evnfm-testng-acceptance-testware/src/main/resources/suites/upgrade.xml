@@ -1,0 +1,95 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2024
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<suite name="EVNFM Upgrade Test Suite" verbose="10" configfailurepolicy="skip" preserve-order="true" >
+
+  <listeners>
+    <listener class-name="com.ericsson.eo.evnfm.acceptance.testng.listeners.EvnfmTestNGListener"/>
+  </listeners>
+
+  <parameter name="evnfmDeployParams" value="evnfmUpgrade/evnfmUpgrade.yaml"/>
+
+  <parameter name="testTargetClusterData" value="cismCluster/testTargetCluster.yaml"/>
+  <parameter name="basicOnboardingData" value="onboarding.yaml"/>
+  <parameter name="basicLCMData" value="basicLCM/basicLCM.yaml"/>
+  <parameter name="instantiateData" value="basicLCM/basicLCM.yaml"/>
+  <parameter name="upgradeData" value="basicLCM/basicLCM.yaml"/>
+
+  <test name="Install Evnfm" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.upgrade.EvnfmUpgrade">
+        <methods>
+          <include name="install"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Register cluster for tests" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.cismcluster.BasicClusterTest">
+        <methods>
+          <include name="testRegisterCluster"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Onboard packages" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.BasicOnboardingTest">
+        <methods>
+          <include name="testOnboardCsarREST"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Lifecycle Operations before Upgrade Evnfm" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.evnfmreleaseflow.instantiate.InstantiateSuccessTest"/>
+    </classes>
+  </test>
+  <test name="Upgrade Evnfm" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.upgrade.EvnfmUpgrade">
+        <methods>
+          <include name="upgrade"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Lifecycle Operations after Upgrade Evnfm" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.evnfmreleaseflow.upgrade.UpgradeSuccessTest"/>
+    </classes>
+  </test>
+  <test name="Delete onboarded packages" parallel="none" >
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.BasicOnboardingTest">
+        <methods>
+          <include name="testDeletePackageREST"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Uninstall Evnfm" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.upgrade.EvnfmUpgrade">
+        <methods>
+          <include name="uninstall"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

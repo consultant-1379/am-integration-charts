@@ -1,0 +1,216 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+packages:
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/a/spider-app-multi-a-v2-no-crd/spider-app-multi-a-v2-no-crd/1.0.39/spider-app-multi-a-v2-no-crd-1.0.39.csar"
+    vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+    vnfdFile: "spider-app-multi-a-v2.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/b/spider-app-multi-b-v2-no-crd/spider-app-multi-b-v2-no-crd/1.0.41/spider-app-multi-b-v2-no-crd-1.0.41.csar"
+    vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+    vnfdFile: "spider-app-multi-b-v2.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_3_3_1/multi/a/spider-app-multi-a-tosca-dm/spider-app-multi-a-tosca-dm/1.0.5/spider-app-multi-a-tosca-dm-1.0.5.csar"
+    vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+    vnfdFile: "spider-app-multi-a-tosca-dm.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_3_3_1/multi/b/spider-app-multi-b-tosca-dm/spider-app-multi-b-tosca-dm/1.0.5/spider-app-multi-b-tosca-dm-1.0.5.csar"
+    vnfdId: "multi-chart-569d-xyz3-5g15f7h500"
+    vnfdFile: "spider-app-multi-b-tosca-dm.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/b/spider-app-multi-b-etsi-tosca-rel4-up/spider-app-multi-b-etsi-tosca-rel4-up/1.0.3/spider-app-multi-b-etsi-tosca-rel4-up-1.0.3.csar"
+    vnfdId: "multi-chart-etsi-rel4-b-455379754d26"
+    vnfdFile: "spider-app-multi-b-etsi-tosca-rel4-up.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: true
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/a/spider-app-multi-a-v2-up/spider-app-multi-a-v2-up/1.0.6/spider-app-multi-a-v2-up-1.0.6.csar"
+    vnfdId: "multi-chart-477c-aab3-2b04e6a271"
+    vnfdFile: "spider-app-multi-a-v2-up.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_3_3_1/multi/a/spider-app-multi-a-tosca-up/spider-app-multi-a-tosca-up/1.0.4/spider-app-multi-a-tosca-up-1.0.4.csar"
+    vnfdId: "multi-chart-477c-aab3-2b04e6a252"
+    vnfdFile: "spider-app-multi-a-tosca-up.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_3_3_1/multi/b/spider-app-multi-b-tosca-up/spider-app-multi-b-tosca-up/1.0.4/spider-app-multi-b-tosca-up-1.0.4.csar"
+    vnfdId: "multi-chart-569d-xyz3-5g15f7h257"
+    vnfdFile: "spider-app-multi-b-tosca-up.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/a/spider-app-multi-a-etsi-tosca-rel4-no-crd/spider-app-multi-a-etsi-tosca-rel4-no-crd-option1-option2/1.0.45/spider-app-multi-a-etsi-tosca-rel4-no-crd-option1-option2-1.0.45.zip"
+    vnfdId: "multi-chart-etsi-rel4-5fcb086597"
+    vnfdFile: "spider-app-multi-a-etsi-tosca-rel4-no-crd.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: OPTION_2
+    inputStreamRequest: true
+    rel4: true
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/b/spider-app-multi-b-etsi-tosca-rel4-no-crd/spider-app-multi-b-etsi-tosca-rel4-no-crd-option1-option2/1.0.48/spider-app-multi-b-etsi-tosca-rel4-no-crd-option1-option2-1.0.48.zip"
+    vnfdId: "multi-chart-etsi-rel4-b-455379754e37"
+    vnfdFile: "spider-app-multi-b-etsi-tosca-rel4-no-crd.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: OPTION_2
+    inputStreamRequest: true
+    rel4: true
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/a/spider-app-multi-a-rel4-dm-non-scalable/spider-app-multi-a-rel4-dm-non-scalable/1.0.4/spider-app-multi-a-rel4-dm-non-scalable-1.0.4.csar"
+    vnfdId: "multi-chart-rel4-5fcb086597-non-scalable"
+    vnfdFile: "spider-app-multi-a-rel4-dm-non-scalable.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: true
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/b/spider-app-multi-b-rel4-dm-mixed-vdu/spider-app-multi-b-rel4-dm-mixed-vdu/1.0.10/spider-app-multi-b-rel4-dm-mixed-vdu-1.0.10.csar"
+    vnfdId: "multi-chart-etsi-rel4-b-455379754e37-mixed_vdu"
+    vnfdFile: "spider-app-multi-b-rel4-dm-mixed-vdu.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: true
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/single/spider-app-a-single-v2/spider-app-a-single-v2/1.0.1/spider-app-a-single-v2-1.0.1.csar"
+    vnfdId: "single-chart-477c-aab3-2b04e6a383"
+    vnfdFile: "spider-app-a-single-v2.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    inputStreamRequest: true
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/b/spider-app-multi-b-v2-dm/spider-app-multi-b-v2-dm/1.0.4/spider-app-multi-b-v2-dm-1.0.4.csar"
+    vnfdId: "multi-chart-569d-xyz3-5g15f7h499-no-downgrade"
+    vnfdFile: "spider-app-multi-b-v2-dm.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/basic/basic-app-a/basic-app-a/1.0.4/basic-app-a-1.0.4.csar"
+    vnfdId: "8eca7b35-72d8-4cab-9fee-138f1c3b9caaa"
+    vnfdFile: "basic-app-a.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/basic/basic-app-c/basic-app-c/1.0.5/basic-app-c-1.0.5.csar"
+    vnfdId: "8eca7b35-72d8-4cab-9fee-138f1c3b9cccc"
+    vnfdFile: "basic-app-c.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: UNSIGNED
+    rel4: false
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/a/spider-app-multi-a-etsi-tosca-rel4-cmpv2-enrollment/spider-app-multi-a-etsi-tosca-rel4-cmpv2-enrollment-option1/1.0.2/spider-app-multi-a-etsi-tosca-rel4-cmpv2-enrollment-option1-1.0.2.csar"
+    vnfdId: "multi-chart-etsi-rel4-cmpv2-enrollment"
+    vnfdFile: "spider-app-multi-a-etsi-tosca-rel4-cmpv2-enrollment.yaml"
+    skipImageUpload: false
+    timeOut: 20
+    packageSecurityOption: OPTION_1
+    rel4: true
+
+clusterConfig:
+  localPath: "${KUBE_CONFIG_PATH:-hahn062.config}"
+  description: "Valid cluster config pointing to external cluster"
+
+certificates:
+  description: "EO trusted certificate list installed by certificate management script"
+  certificates:
+    - name: "root_ca.pem"
+      certificate: |
+        -----BEGIN CERTIFICATE-----
+        MIICxzCCAa+gAwIBAgIJAI18aq9lz7jtMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
+        BAMMB1Jvb3QgQ0EwHhcNMjIwODEyMDkyNzE2WhcNMzIwODA5MDkyNzE2WjASMRAw
+        DgYDVQQDDAdSb290IENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA
+        rnDw/WuelZObMnayatETWPlDgAZI932oqFjjeGhOn6+vQowojtsg8gXHqhlXFklc
+        RxswcW03LwQDyZ45Ez730vi0TcdpccYhynTfB632POtcLPfHYkvm8XzyvKuyuUVC
+        Ch6P5DblAScGdEtt2dkC/IHLBMHzYa1PSHEMotL3SsFwH92XC2BnCXdMpoiKYz/L
+        l92gCoW/74JIHCg3fK2xkEd/Pe4+5zaaJFsRCT5Qj47J2hmxc94SQSQwlKgsrU47
+        DPVBfZg/JEyiAeZoAGGvXvB1XagFnOUe56sXLrSOe7lCVRrS+CfQ7a+WGjtfLXHS
+        e4UDlYIhWHrtItRlf0ga4QIDAQABoyAwHjALBgNVHQ8EBAMCAQYwDwYDVR0TAQH/
+        BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAJ4+ykcB+86aVrAabnECuffG33EFw
+        vIjmPkBrcC9a0nbXPT8jG69zpM1jTM1nXa8nGzFGhpjxjl0WjCbynL8oQ8oTDqBK
+        ddHEVQZzsLh0XruhZJ4Hx/ZdGpZqksBeyFitQAI7bgJsA9sfYFjjH4EICSiUAKkz
+        R4cVajWLngboACxfNOCDmBz6aRDjW4aLUmMoH0DQAeUK5cxfFHKoUFUK8Fzd7OgO
+        pRTHjasfsyhbYMbO+LLhpWmL+wGLCn8TBjdJ/x7t1BOiLxHglYWI/8rykUKh5Gts
+        j0WSFX4mcmDfxpzUSkRxIMd0K0DDkguO4ez60rpBKgu2n3IS6FxXORESzw==
+        -----END CERTIFICATE-----
+    - name: "intermediate_1_ca.pem"
+      certificate: |
+        -----BEGIN CERTIFICATE-----
+        MIIC1DCCAbygAwIBAgIJAJwdpR47bVsGMA0GCSqGSIb3DQEBCwUAMBIxEDAOBgNV
+        BAMMB1Jvb3QgQ0EwHhcNMjIwODEyMDkyNzU5WhcNMzIwODA5MDkyNzU5WjAcMRow
+        GAYDVQQDDBFJbnRlcm1lZGlhdGUgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEP
+        ADCCAQoCggEBAMGos+JYOYUfVvagOJ0A1mz/IeYHaEfzBoSRo78sTGV5AHsq9bQ8
+        BqLmeGDj7XzxoXfakXnN7Mg9SkJ6D6caSI+6TcBU2t2grGEu3VBZnn5mWTg8Xw7X
+        ySh0nd6hyfpqHDsUcUwi37OvXQSu7cMmxABUYTZ3FZdEpHewLh6sBi5CGvvSESZV
+        1XV5MGdbbLK1FpMpOng3SGXKKAvQ13aDpixbhh5Ei58fYIcy/RgPbSykl/zJgWcK
+        7Y3V/yX18eWxDfKAPM52WjC98+2yMYtVXRWNJp5MDCRL9VL2ADJMLR7NWv+HtPFf
+        /QZjxwMDqNpeUA7Gm0nw5/grbeIey5ZcGB0CAwEAAaMjMCEwCwYDVR0PBAQDAgIE
+        MBIGA1UdEwEB/wQIMAYBAf8CAQowDQYJKoZIhvcNAQELBQADggEBAI7ysApv0l1S
+        dplz2IJkJjuHl/8OMHf3GlMmkac7NEjThpYApNGVLi0Ko2GiT1iVzTarVc8Gq2nc
+        7F5HKUa9Kz90t717N5lEsN2WMA6ijT0o2xVeKe0kgmkElNFVVPTful6WaWiLBIhM
+        2MIvI1yXa5IaVVMynFinytJAHgrt1jLXe7NGaejL6Bn1YFXM5nIy7JkwhS9lDeYD
+        Fa2y0K2kMm0dIdGePh1T7fBox1Icpj+YQjctVy6wgrTrtKRHJFreyi1bwfm+z7dE
+        lzsnIqMdR6itwJiSeiDoIzKXXBqacODfssm3luh586Gp+DmX9haPgO6Swk230WFI
+        j7mrCqJNW+Y=
+        -----END CERTIFICATE-----
+    - name: "signing_ca.pem"
+      certificate: |
+        -----BEGIN CERTIFICATE-----
+        MIICwzCCAaugAwIBAgIJAOoiZ6zIufjQMA0GCSqGSIb3DQEBCwUAMBwxGjAYBgNV
+        BAMMEUludGVybWVkaWF0ZSBDQSAxMB4XDTIyMDgxMjA5Mjk0MVoXDTMyMDgwOTA5
+        Mjk0MVowFTETMBEGA1UEAwwKU2lnbmluZyBDQTCCASIwDQYJKoZIhvcNAQEBBQAD
+        ggEPADCCAQoCggEBAKHRLHlLB+v0FFcizNs7bhHe3xmos4yNOaCBBQigzjRLA8ba
+        D9p2Qtmm4/Zy6gaVhUMf2HEVcZ+CyHKkE6VXtSmdwNmShoYTvI6RA0DOIHJkbDE8
+        zTRzsvjzkP4jpCcLxUL3nHTn/xB1v5f80cwYmUD+bPN9mj11EBMHy80nY9Lug7h5
+        UsqeeYs5INegYNZnq5O9nRZYeq44MhFlhwOC/9lyRXNk1PjuqWROedBCoFFghqFa
+        nXT6CKIhJpXlee47uD8CbaYwwsqul5ks5qAAlT7zl0Ib83UDnNTzvOMWvlD93FQs
+        t8esEbot7KSL+7s0M6mcYVXrHxkGZGWk799P7psCAwEAAaMPMA0wCwYDVR0PBAQD
+        AgeAMA0GCSqGSIb3DQEBCwUAA4IBAQBR6g38ih/SonfITdlxy4HAwb1zCKc/VbLf
+        USRQ31/Xlp//Gry3N47zJaUq2dScE+zmoBq5c9D+z7TZIebJCqf6VKS/MfsnXYqQ
+        nJid7700OvmkVOsk1FbYZVXW+bnZSbnTzg4TbIdKcV77h0DvAIa2axvXJcIh8T7c
+        MX1VWlfpBOcKZAhVvuyrNKcK1EJrGwQuW5Pq4jMlJL2/pf4ffbG9nPjd0wYcwYDm
+        1yNbGJHdwdCHdm67c7Lee3JKPQfwCSZfeJF9RIK39B+Eiwe7HWL1ISoQB/jKpk0Q
+        eUMHoQv9y2M7zthcJQ8C2TQQU/BHfFzCqZ189gCBK9njn2lSZSbW
+        -----END CERTIFICATE-----
+

@@ -1,0 +1,127 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  vnfdId: "36ff67a9-0de4-48f9-97a3-4b0661670934"
+  vnfInstanceName: basic-lcm
+  vnfInstanceDescription: Example description
+  namespace: basic-lcm-single-chart-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 360
+  cleanUpResources: true
+  skipVerification: false
+  configDay0:
+    secrets:
+      - name: restore-external-storage-secret
+        data:
+          restore.externalStorageURI: external-storage-url
+          restore.externalStorageCredentials: external-storage-credentials
+      - name: secret1
+        data:
+          key3: value3
+          key4: value4
+      - name: secret2
+        data:
+          key5: value5
+          key6: value6
+  additionalParams:
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    config.nbi.file.enabled: false
+    eric-adp-gs-testapp.ingress.enabled: false
+    tags.pm: true
+    backup-controller.enabled: false
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+    tags.all: false
+    eric-pm-server.server.ingress.enabled: false
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    bro.ingress.enabled: false
+    eric-pm-server.server.persistentVolume.storageClass: network-block
+    retrieveUnsealKey: false
+    day0.configuration.secretname: restore-external-storage-secret
+    day0.configuration.param1.key: restore.externalStorageURI
+    day0.configuration.param1.value: external-storage-url
+    day0.configuration.param2.key: restore.externalStorageCredentials
+    day0.configuration.param2.value: external-storage-credentials
+    day0.configuration.secrets:
+      secret1:
+        key3: value3
+        key4: value4
+      secret2:
+        key5: value5
+        key6: value6
+
+cnfsToUpgrade:
+  vnfdId: "2ce9484e-85e5-49b7-ac97-445379754e37"
+  vnfInstanceName: basic-lcm
+  vnfInstanceDescription: Example description
+  namespace: basic-lcm-single-chart-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  cleanUpResources: true
+  skipVerification: false
+  applicationTimeout: 600
+  additionalParams:
+    persistScaleInfo: true
+    tags.pm: true
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    bro.ingress.enabled: false
+    eric-adp-gs-testapp.ingress.enabled: false
+    eric-adp-gs-testapp.service.replicaCount: 1
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    upgrade.downsize.allowed: true
+    config.nbi.file.enabled: false
+    backup-controller.enabled: false
+    global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+    tags.all: false
+    eric-pm-server.server.ingress.enabled: false
+    eric-pm-server.server.persistentVolume.storageClass: network-block
+
+cnfsToFailureUpgrade:
+  vnfdId: "2ce9484e-85e5-49b7-ac97-445379754e37"
+  vnfInstanceName: basic-lcm
+  vnfInstanceDescription: Example description
+  namespace: basic-lcm-single-chart-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: ROLLED_BACK
+  expectedComponentsState: Running
+  cleanUpResources: true
+  skipVerification: false
+  applicationTimeout: 600
+  additionalParams:
+    persistScaleInfo: true
+    tags.pm: true
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    bro.ingress.enabled: false
+    eric-adp-gs-testapp.ingress.enabled: false
+    eric-adp-gs-testapp.service.replicaCount: 1
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    upgrade.downsize.allowed: false
+    isAutoRollbackAllowed: true
+    config.nbi.file.enabled: false
+    backup-controller.enabled: false
+    global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+    tags.all: false
+    eric-pm-server.server.ingress.enabled: false
+    eric-pm-server.server.persistentVolume.storageClass: not_exist

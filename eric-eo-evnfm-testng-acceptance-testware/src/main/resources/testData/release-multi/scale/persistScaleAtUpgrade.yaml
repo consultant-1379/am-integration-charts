@@ -1,0 +1,176 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+  vnfInstanceName: e2e-scale-persist-multi
+  vnfInstanceDescription: Example description
+  namespace: e2e-scale-persist-multi-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 600
+  instantiationLevel: instantiation_level_1
+  extensions:
+    VNF-3GPP_5G-UE-AUTH^: ManualControlled
+    50CE_NT-AU_PONT%: ManualControlled
+    UA-VNF-14PP#: ManualControlled
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: CISMControlled
+  cleanUpResources: false
+  skipVerification: false
+  scaleInfo:
+    VNF-3GPP_5G-UE-AUTH^: 0
+    50CE_NT-AU_PONT%: 0
+    UA-VNF-14PP#: 0
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: 0
+  additionalParams:
+    namespace: e2e-scale-persist-multi-ns
+    releaseName: e2e-scale-persist-multi
+    applicationTimeOut: 600
+    disableOpenapiValidation: true
+    skipJobVerification: false
+    skipVerification: false
+    helmNoHooks: false
+    cleanUpResources: false
+    manoControlledScaling: false
+    tags.all: false
+    tags.pm: true
+    eric-adp-gs-testapp.ingress.enabled: false
+    eric-pm-server.enabled: false
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    config.nbi.file.enabled: false
+    bro_endpoint_url: http://eric-ctrl-bro.YOUR-NAMESPACE:7001
+    global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+    bro.ingress.enabled: false
+    backup-controller.enabled: false
+    retrieveUnsealKey: false
+
+additionalCnfDataForScaleOutAspect1Operation:
+  aspectToScale: VNF-3GPP_5G-UE-AUTH^
+  stepsToScale: 1
+  scaleInfo:
+    VNF-3GPP_5G-UE-AUTH^: 1
+  vnfInstanceName: e2e-scale-persist-multi
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 1
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+
+additionalCnfDataForScaleOutAspect2Operation:
+  aspectToScale: 50CE_NT-AU_PONT%
+  stepsToScale: 1
+  scaleInfo:
+    50CE_NT-AU_PONT%: 1
+  vnfInstanceName: e2e-scale-persist-multi
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 5
+    <vnfInstanceName>-vnfc4: 5
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+
+additionalCnfDataForScaleOutAspect3Operation:
+  aspectToScale: UA-VNF-14PP#
+  stepsToScale: 1
+  scaleInfo:
+    UA-VNF-14PP#: 1
+  vnfInstanceName: e2e-scale-persist-multi
+  targets:
+    <vnfInstanceName>-test-cnf: 3
+    <vnfInstanceName>-vnfc1: 3
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 5
+    <vnfInstanceName>-vnfc4: 5
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+
+cnfToUpgrade:
+  vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+  vnfInstanceName: e2e-scale-persist-multi
+  vnfInstanceDescription: Example description
+  applicationTimeout: 600
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  extensions:
+    vnfControlledScaling:
+      VNF-3GPP_5G-UE-AUTH^: ManualControlled
+      50CE_NT-AU_PONT%: ManualControlled
+      CCRC_SO_PHONE-5GCORE-HARD_: ManualControlled
+  additionalParams:
+    releaseName: e2e-scale-persist-multi
+    applicationTimeOut: 600
+    disableOpenapiValidation: true
+    skipJobVerification: false
+    persistScaleInfo: true
+    tags.all: false
+    tags.pm: true
+    eric-adp-gs-testapp.ingress.enabled: false
+    eric-pm-server.enabled: false
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    config.nbi.file.enabled: false
+    global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+    bro.ingress.enabled: false
+    backup-controller.enabled: false
+
+cnfToRollback:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+  sourceVnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+  vnfInstanceName: e2e-scale-persist-multi
+  vnfInstanceDescription: Example description
+  applicationTimeout: 600
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+
+scaleConfigAspect1OutRequest:
+  type: SCALE_OUT
+  aspectId: VNF-3GPP_5G-UE-AUTH^
+  numberOfSteps: 1
+  additionalParams:
+    applicationTimeOut: 600
+
+scaleConfigAspect2OutRequest:
+  type: SCALE_OUT
+  aspectId: 50CE_NT-AU_PONT%
+  numberOfSteps: 1
+  additionalParams:
+    applicationTimeOut: 600
+
+scaleConfigAspect3OutRequest:
+  type: SCALE_OUT
+  aspectId: UA-VNF-14PP#
+  numberOfSteps: 1
+  additionalParams:
+    applicationTimeOut: 600

@@ -1,0 +1,77 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+global:
+  hosts:
+    vnfm: "vmfm.ericsson.se"
+  registry:
+    url: "armdocker.rnd.ericsson.se"
+    username: "test"
+    password: "test"
+  support:
+    ipv6:
+      enabled: false
+  timezone: UTC
+  createClusterRoles: true
+  geo-redundancy:
+    enabled: true
+services:
+  onboarding:
+    enabled: true
+eric-am-common-wfs:
+  helm:
+    url: "ingress.ericsson.se"
+  dockerRegistry:
+    secret: null
+eric-lcm-container-registry:
+  enabled: true
+  replicaCount: 2
+  ingress:
+    hostname: "ingress.ericsson.se"
+  persistence:
+    persistentVolumeClaim:
+      size: "10Gi"
+  registry:
+      storage:
+        migration:
+          enabled: true
+        s3:
+          enabled: true
+          authSecret: eric-eo-object-store-cred
+eric-lcm-helm-chart-registry:
+  replicaCount: 2
+  ingress:
+    enabled: true
+    hostname: "ingress.ericsson.se"
+  env:
+    secret:
+      BASIC_AUTH_USER: "evnfm"
+      BASIC_AUTH_PASS: "evnfm"
+    s3:
+      enabled: true
+    s3Secret: eric-eo-object-store-cred
+  migration:
+    enabled: true
+eric-global-lcm-container-registry:
+  hostname: "ingress.ericsson.se"
+  username: "evnfm"
+  password: "evnfm"
+eric-vnfm-orchestrator-service:
+  oss:
+    topology:
+      secretName: null
+  smallstack:
+    application: true

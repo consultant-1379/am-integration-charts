@@ -1,0 +1,79 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToModify:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+  packageName: Ericsson.spider-app-multi-a-tosca.1.0.29s.1.0.29
+  vnfInstanceName: modify-vnf-info-before-instantiate
+  vnfInstanceDescription: Modified description
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  applicationTimeout: 360
+  metadata:
+    Tenant: ECM
+  extensions:
+    vnfControlledScaling:
+      Aspect1: ManualControlled
+      Aspect2: ManualControlled
+      Aspect3: ManualControlled
+      Aspect5: ManualControlled
+
+cnfToInstantiate:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+  packageName: Ericsson.spider-app-multi-a-tosca.1.0.29s.1.0.29
+  vnfInstanceName: modify-vnf-info-rest
+  vnfInstanceDescription: Initial VNF Description
+  namespace: modify-vnf-info-rest-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 360
+  cleanUpResources: false
+  skipVerification: false
+  additionalParams:
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    config.nbi.file.enabled: false
+    eric-adp-gs-testapp.ingress.enabled: false
+    tags.pm: true
+    backup-controller.enabled: false
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+    tags.all: false
+    eric-pm-server.server.ingress.enabled: false
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    bro.ingress.enabled: false
+    eric-pm-server.server.persistentVolume.storageClass: network-block
+    retrieveUnsealKey: false
+
+cnfToModifyAfterInstantiate:
+  vnfInstanceName: modify-vnf-info-rest
+  vnfInstanceDescription: Modified description
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  applicationTimeout: 360
+  metadata:
+    Tenant: ECM
+  extensions:
+    vnfControlledScaling:
+      Aspect1: CISMControlled
+      Aspect2: CISMControlled
+      Aspect3: ManualControlled
+      Aspect5: ManualControlled

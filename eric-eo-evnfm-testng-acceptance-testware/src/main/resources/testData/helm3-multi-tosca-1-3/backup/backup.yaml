@@ -1,0 +1,75 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+  packageName: Ericsson.spider-app-multi-a-tosca.1.0.29s.1.0.29
+  vnfInstanceName: backup-rest
+  vnfInstanceDescription: Example description
+  namespace: backup-rest-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 360
+  cleanUpResources: true
+  skipVerification: false
+  configDay0:
+    secrets:
+      - name: restore-external-storage-secret
+        data:
+          restore.externalStorageURI: external-storage-url
+          restore.externalStorageCredentials: external-storage-credentials
+      - name: secret1
+        data:
+          key3: value3
+          key4: value4
+      - name: secret2
+        data:
+          key5: value5
+          key6: value6
+  additionalParams:
+    bro_endpoint_url: http://eric-ctrl-bro.<namespace>:7001
+    backup-controller.enabled: true
+    global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+    bro.ingress.enabled: false
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    config.nbi.file.enabled: false
+    tags.pm: true
+    eric-adp-gs-testapp.ingress.enabled: false
+    tags.all: false
+    eric-pm-server.server.ingress.enabled: false
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    eric-pm-server.server.persistentVolume.storageClass: network-block
+    retrieveUnsealKey: false
+    day0.configuration.secretname: restore-external-storage-secret
+    day0.configuration.param1.key: restore.externalStorageURI
+    day0.configuration.param1.value: external-storage-url
+    day0.configuration.param2.key: restore.externalStorageCredentials
+    day0.configuration.param2.value: external-storage-credentials
+    day0.configuration.secrets:
+      secret1:
+        key3: value3
+        key4: value4
+      secret2:
+        key5: value5
+        key6: value6
+
+backupRequest:
+  additionalParams:
+    backupName: "backupDefaultScope"
+    scope: "DEFAULT"

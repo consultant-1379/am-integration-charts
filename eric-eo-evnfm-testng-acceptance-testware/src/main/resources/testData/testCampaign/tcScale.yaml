@@ -1,0 +1,48 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+# copied from ../adminScale/backupUI.yaml
+# should be filled with proper values when implementing the scale in\out test of the test campaign
+cnfsToInstantiate:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+    packageName: Ericsson.spider-app-multi-a-v2.1.0.18s.1.0.18
+    vnfInstanceName: admin-scale-ui-test
+    vnfInstanceDescription: Example description
+    namespace: e2e-admin-scale-test
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    applicationTimeout: 360
+    instantiationLevel: instantiation_level_2
+    extensions:
+      Aspect1: CISMControlled
+      Aspect2: ManualControlled
+      Aspect3: ManualControlled
+      Aspect5: CISMControlled
+    cleanUpResources: false
+    additionalParams:
+      eric-pm-server.server.persistentVolume.storageClass: network-block
+    targets:
+      admin-scale-ui-test-vnfc1: 1
+      admin-scale-ui-test-vnfc2: 1
+      admin-scale-ui-test-vnfc3: 1
+      admin-scale-ui-test-vnfc5: 2
+    scaleInfo:
+      Aspect1: 0
+      Aspect2: 0
+      Aspect3: 0
+      Aspect5: 1

@@ -1,0 +1,424 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+#
+#
+# Please use like flavour.
+#Update eric-eo-helmfile/environment.yaml with next lines:
+#```
+#  nonHA:
+#    values:
+#      - ./metadata.yaml
+#      - ./flavors/nonHA.yaml
+#      - ./optionality.yaml
+#      - ./default-values/values.yaml.gotmpl
+#```
+#Copy the flavor-nonHA.yaml to eric-eo-helmfile/flavors/nonHA.yaml
+#then you can start deployment with additional option --flavor nonHA
+
+tags:
+  eoEvnfm: true
+  eoVmvnfm: false
+  eoCm: false
+
+eric-eo-evnfm:
+  application-manager-postgres:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"
+  am-common-wfs-ui:
+    resources:
+      commonwfsui:
+        limits:
+          memory: "200Mi"
+          cpu: "200m"
+  eric-am-common-wfs:
+    resources:
+      commonwfs:
+        limits:
+          memory: "2Gi"
+          cpu: "400m"
+  eric-lcm-container-registry:
+    resources:
+      registry:
+        requests:
+          cpu: "100m"
+          ephemeral-storage:
+        limits:
+          cpu: "800m"
+          ephemeral-storage:
+      brAgent:
+        requests:
+          cpu: "300m"
+        limits:
+          cpu: "1200m"
+      sidecar:
+        requests:
+          cpu: "300m"
+        limits:
+          cpu: "1000m"
+      migration:
+        requests:
+          cpu: "300m"
+        limits:
+          cpu: "1500m"
+      init:
+        requests:
+          cpu: "100m"
+        limits:
+          cpu: "200m"
+      logshipper:
+        requests:
+          cpu: "50m"
+        limits:
+          cpu: "100m"
+  eric-lcm-helm-chart-registry:
+    resources:
+      registry:
+        requests:
+          cpu: "100m"
+        limits:
+          cpu: "400m"
+      brAgent:
+        requests:
+          cpu: "100m"
+        limits:
+          cpu: "400m"
+      sidecar:
+        requests:
+          cpu: "300m"
+        limits:
+          cpu: "800m"
+      migration:
+        requests:
+          cpu: "100m"
+        limits:
+          cpu: "500m"
+      init:
+        requests:
+          cpu: "100m"
+        limits:
+          cpu: "200m"
+      logshipper:
+        requests:
+          cpu: "50m"
+        limits:
+          cpu: "100m"
+  eric-vnfm-orchestrator-service:
+    resources:
+      orchestrator:
+        limits:
+          memory: "768Mi"
+          cpu: "500m"
+eric-oss-function-orchestration-common:
+  eric-eo-fh-event-to-alarm-adapter:
+    resources:
+      eventToAlarmAdapter:
+        limits:
+          memory: "1024Mi"
+          cpu: "200m"
+  eric-eo-batch-manager:
+    resources:
+      batchManager:
+        limits:
+          memory: "1024Mi"
+          cpu: "1000m"
+  eric-eo-lm-consumer:
+    resources:
+      licenseConsumer:
+        limits:
+          memory: "1024Mi"
+          cpu: "200m"
+      licenseConsumerInit:
+        limits:
+          memory: "100Mi"
+          cpu: "300m"
+  eric-eo-evnfm-crypto:
+    resources:
+      eric-eo-evnfm-crypto:
+        limits:
+          memory: 250Mi
+          cpu: 200m
+  eric-eo-evnfm-nbi:
+    resources:
+      limits:
+        memory: 350Mi
+        cpu: 400m
+  eric-am-onboarding-service:
+    resources:
+      onboarding:
+        limits:
+          memory: "1024Mi"
+          cpu: "1000m"
+eric-cloud-native-base:
+  eric-pm-server:
+    resources:
+      eric-pm-server:
+        limits:
+          cpu: "800m"
+        requests:
+          cpu: "250m"
+      eric-pm-configmap-reload:
+        limits:
+          cpu: "200m"
+        requests:
+          cpu: "100m"
+      eric-pm-exporter:
+        limits:
+          cpu: "200m"
+        requests:
+          cpu: "100m"
+  eric-log-shipper:
+    resources:
+      logshipper:
+        requests:
+          cpu: "100m"
+        limits:
+          cpu: "200m"
+  eric-sec-key-management:
+    resources:
+      ca:
+        limits:
+          memory: "400Mi"
+          cpu: "100m"
+      unsealer:
+        limits:
+          memory: "400Mi"
+          cpu: "100m"
+      shelter:
+        limits:
+          memory: "400Mi"
+          cpu: "100m"
+      vault:
+        limits:
+          memory: "400Mi"
+          cpu: "100m"
+  eric-fh-alarm-handler:
+    resources:
+      alarmhandler:
+        limits:
+          memory: "384Mi"
+          cpu: "500m"
+  eric-cm-mediator: # need more resources
+    resources:
+      eric-cm-mediator:
+        limits:
+          memory: "512Mi"
+          cpu: "700m"
+  eric-data-distributed-coordinator-ed:
+    resources:
+      dced:
+        limits:
+          cpu: "400m"
+          memory: "400Mi"
+      brAgent:
+        limits:
+          cpu: "400m"
+          memory: "400Mi"
+      hooklauncher:
+        limits:
+          memory: "50Mi"
+          cpu: "20m"
+  eric-sec-sip-tls:
+    resources:
+      sip-tls:
+        limits:
+          memory: "200Mi"
+          cpu: "100m"
+      sip-tls-supervisor:
+        limits:
+          memory: "200Mi"
+          cpu: "100m"
+  eric-ctrl-bro:
+    resources:
+      backupAndRestore:
+        limits:
+          cpu: "1"
+          memory: "2Gi"
+  eric-data-search-engine:
+    resources:
+      ingest:
+        limits:
+          cpu: "500m"
+          memory: "1Gi"
+      master:
+        limits:
+          cpu: "500m"
+          memory: "1Gi"
+      data:
+        limits:
+          cpu: "500m"
+          memory: "2Gi"
+  eric-data-search-engine-curator:
+    resources:
+      curator:
+        limits:
+          memory: "100Mi"
+          cpu: "100m"
+  eric-sec-access-mgmt: # need more resources
+    resources:
+      iam:
+        limits:
+          memory: "768Mi"
+          cpu: "500m"
+  eric-log-transformer:
+    resources:
+      logtransformer:
+        limits:
+          cpu: 250m
+          memory: 6Gi
+  eric-data-object-storage-mn:
+    resources:
+      server:
+        limits:
+          memory: 2Gi
+          cpu: 1000m
+  eric-fh-snmp-alarm-provider:
+    resources:
+      alarmprovider:
+        limits:
+          memory: "384Mi"
+          cpu: "0.1"
+  eric-lm-combined-server:
+    resources:
+      eric-lm-license-consumer-handler:
+        limits:
+          cpu: 100m
+          memory: 128Mi
+      eric-lm-license-server-client:
+        limits:
+          cpu: 100m
+          memory: 512Mi
+  eric-data-message-bus-kf:
+    resources:
+      messagebuskf:
+        limits:
+          cpu: "1"
+          memory: "1Gi"
+  eric-data-coordinator-zk:
+    resources:
+      datacoordinatorzk:
+        limits:
+          cpu: "1"
+          memory: "2Gi"
+  eric-sec-access-mgmt-db-pg:
+    eric-fh-alarm-handler-db-pg:
+      resources:
+        postgres:
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+  eric-fh-alarm-handler-db-pg:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"
+  eric-cm-mediator-db-pg:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"
+  eric-lm-combined-server-db-pg:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"
+eric-oss-common-base:
+  eric-adp-gui-aggregator-service:
+    resources:
+      main:
+        limits:
+          cpu: 250m
+          memory: 300Mi
+      ericsecoauthsap:
+        limits:
+          cpu: "50m"
+          memory: "130Mi"
+      ericsecoauthproxy:
+        limits:
+          cpu: 500m
+          memory: 500Mi
+  eric-eo-usermgmt:
+    resources:
+      eric-eo-usermgmt:
+        limits:
+          memory: "600M"
+          cpu: "512m"
+  eric-eo-usermgmt-ui:
+    resources:
+      eric-eo-usermgmt-ui:
+        limits:
+          memory: "300M"
+        cpu: "200m"
+  eric-eo-api-gateway:
+    resources:
+      requests:
+        cpu: "100m"
+      limits:
+        cpu: "500m"
+  eric-eo-common-br-agent:
+    resources:
+      requests:
+        cpu: "100m"
+      limits:
+        cpu: "800m"
+  eric-gr-bur-orchestrator:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 750Mi
+  eric-cnom-server:
+    resources:
+      server:
+        limits:
+          memory: 400Mi
+          cpu: 150m
+  eric-pm-alert-manager:
+    resources:
+      alertmanager:
+        limits:
+          enabled: true
+          cpu: 200m
+          memory: 512Mi
+  eric-oss-common-postgres:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"
+  eric-cnom-server-database-pg:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"
+  eric-gr-bur-database-pg:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"
+  eric-eo-subsystem-management-database-pg:
+    resources:
+      postgres:
+        limits:
+          memory: "512Mi"
+          cpu: "200m"

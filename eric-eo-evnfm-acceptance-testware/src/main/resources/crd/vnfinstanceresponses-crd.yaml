@@ -1,0 +1,40 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: vnfinstanceresponses.evnfm.test.e2e.bur
+spec:
+  group: evnfm.test.e2e.bur
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              x-kubernetes-preserve-unknown-fields: true
+              type: object
+  scope: Namespaced
+  names:
+    plural: vnfinstanceresponses
+    singular: vnfinstanceresponse
+    kind: VnfInstanceResponse
+    shortNames:
+      - vir

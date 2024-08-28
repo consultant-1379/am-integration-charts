@@ -1,0 +1,40 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "eric-eo-evnfm.name" . }}-product-info
+  labels:
+  {{- include "eric-eo-evnfm.labels.extended-defaults" . | nindent 4 }}
+    ericsson.com/swim: "enabled"
+  annotations:
+  {{- include "eric-eo-evnfm.annotations" .| nindent 4 }}
+data:
+  application.yml: |-
+    product:
+      name: EVNFM
+      version: {{ .Chart.Version }}
+      {{- $charts := .Chart.Dependencies | toJson }}
+      {{- $attribute := splitList "," $charts }}
+      dependencies:
+        {{- range $dependency, $val := $attribute }}
+        {{- if contains "name" $val }}
+        - name: {{ (split ":" $val)._1 | toString }}
+          {{- else if contains "version" $val }}
+          version: {{ (split ":" $val)._1 | toString }}
+        {{- end }}
+  {{- end }}

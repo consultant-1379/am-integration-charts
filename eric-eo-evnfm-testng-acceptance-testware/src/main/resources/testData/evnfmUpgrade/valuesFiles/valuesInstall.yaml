@@ -1,0 +1,90 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+global:
+  hosts:
+    iam: "keycloak.latest-env-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+    vnfm: "evnfm.latest-env-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+    gas: "gas.latest-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+  registry:
+    pullSecret: "arm-pullsecret"
+    username: "amadm100"
+    password: "ciTesting123!"
+  iccrAppIngresses: false
+eric-eo-evnfm:
+  eric-am-onboarding-service:
+    registry-tls-secret: "registry-tls-secret"
+  eric-lcm-container-registry:
+    ingress:
+      host: "registry.latest-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+      hostname: "registry.latest-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+      tls:
+        secretName: "registry-tls-secret"
+    registry:
+      users:
+        secret: "container-registry-users-secret"
+      volumes:
+        data:
+          size: "10Gi"
+    persistence:
+      persistentVolumeClaim:
+        size: "10Gi"
+  eric-vnfm-orchestrator-service:
+    smallstack:
+      application: true
+  eric-lcm-helm-chart-registry:
+    ingress:
+      host: "helm.latest-env-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+      hostname: "helm.latest-env-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+    env:
+      secret:
+        BASIC_AUTH_USER: "admin"
+        BASIC_AUTH_PASS: "ciTesting123!"
+eric-eo-usermgmt:
+  iam:
+    admin:
+      url: "https://keycloak.latest-env-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}/auth/realms/master"
+eric-sec-access-mgmt:
+  ingress:
+    hostname: "keycloak.latest-env-eric-evnfm.${CLUSTER_BASE_URL:-hahn062.rnd.gic.ericsson.se}"
+  egress:
+    ldap:
+      certificates:
+        trustedCertificateListSecret: ""
+  iccrAppIngresses: false
+logging:
+  enabled: false
+tags:
+  eoEvnfm: true
+eric-eo-evnfm-nbi:
+  eric-evnfm-rbac:
+    defaultUser:
+      username: "vnfm"
+      password: "ciTesting123!"
+gas:
+  defaultUser:
+    username: "gasuser"
+    password: "gasTesting123!"
+eric-ctrl-bro:
+  sftp:
+    username: "broAdmin"
+    password: "broPassword123!"
+system-user:
+  credentials:
+    username: "system-user"
+    password: "ciTestingUser123!"
+eric-tm-ingress-controller-cr:
+  enabled: false

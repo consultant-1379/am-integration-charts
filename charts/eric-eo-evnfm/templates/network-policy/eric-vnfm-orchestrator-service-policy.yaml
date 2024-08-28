@@ -1,0 +1,44 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+{{ if .Values.global.networkPolicy.enabled -}}
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ template "eric-eo-evnfm.name" . }}-eric-vnfm-orchestrator-service-policy
+  labels:
+  {{- include "eric-eo-evnfm.labels.extended-defaults" . | nindent 4 }}
+  annotations:
+  {{- include "eric-eo-evnfm.annotations" .| nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app: eric-vnfm-orchestrator-service
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: eric-eo-api-gateway
+    - podSelector:
+        matchLabels:
+          app: eric-pm-server
+    - podSelector:
+        matchLabels:
+          app: eric-eo-evnfm-nbi
+    - podSelector:
+        matchLabels:
+          app: eric-vnflcm-service
+{{- end }}

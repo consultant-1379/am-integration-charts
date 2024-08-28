@@ -1,0 +1,6 @@
+[submodule "am-ci-flow"]
+	path = am-ci-flow
+	url = ../am-ci-flow
+[submodule "eo-integration-charts"]
+	path = eo-integration-charts
+	url = ../../com.ericsson.oss.orchestration.eo/eo-integration-charts

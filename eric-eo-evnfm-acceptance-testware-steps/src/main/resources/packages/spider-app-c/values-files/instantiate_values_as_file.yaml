@@ -1,0 +1,50 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+eric-pm-server:
+  server:
+    ingress:
+      enabled: false
+    persistentVolume:
+      storageClass: "network-block"
+eric-adp-gs-testapp:
+  ingress:
+    enabled: false
+  tls:
+    dced:
+      enabled: false
+tags:
+  all: false
+  pm: true
+influxdb:
+  ext:
+    apiAccessHostname: influxdb-service2
+pm-testapp:
+  ingress:
+    domain: server-instantiate
+vnfc2:
+  ingress:
+    host: "host1"
+vnfc1:
+  ingress:
+    host: "host2"
+vnfc4:
+  ingress:
+    host: "host3"
+vnfc3:
+  ingress:
+    host: "host4"
+

@@ -1,0 +1,138 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+optionality:
+  eric-cloud-native-base:
+    eric-cm-mediator:
+      enabled: true
+    eric-cm-mediator-db-pg:
+      enabled: true
+    eric-fh-snmp-alarm-provider:
+      enabled: true
+    eric-data-document-database-pg:
+      enabled: true
+    eric-fh-alarm-handler-db-pg:
+      enabled: true
+    eric-sec-access-mgmt-db-pg:
+      enabled: false
+    eric-lm-combined-server-db-pg:
+      enabled: true
+    eric-pm-server:
+      enabled: true
+    eric-data-message-bus-kf:
+      enabled: false
+    eric-data-coordinator-zk:
+      enabled: false
+    eric-sec-key-management:
+      enabled: true
+    eric-fh-alarm-handler:
+      enabled: true
+    eric-sec-access-mgmt:
+      enabled: true
+    eric-sec-sip-tls:
+      enabled: true
+    eric-odca-diagnostic-data-collector:
+      enabled: false
+    eric-data-distributed-coordinator-ed:
+      enabled: true
+    eric-sec-certm:
+      enabled: true
+    eric-ctrl-bro:
+      enabled: true
+    eric-lm-combined-server:
+      enabled: true
+    eric-data-search-engine:
+      enabled: true
+    eric-data-search-engine-curator:
+      enabled: true
+    eric-log-transformer:
+      enabled: true
+    eric-log-shipper:
+      enabled: true
+    eric-data-object-storage-mn:
+      enabled: true
+    eric-dst-agent:
+      enabled: false
+    eric-dst-collector:
+      enabled: false
+    eric-cloud-native-kvdb-rd-operand:
+      enabled: true
+    eric-si-application-sys-info-handler:
+      enabled: true
+    eric-data-key-value-database-rd:
+      enabled: true
+  eric-oss-common-base:
+    eric-oss-ddc:
+      enabled: false
+    eric-eo-api-gateway:
+      enabled: true
+    eric-eo-usermgmt:
+      enabled: true
+    eric-eo-usermgmt-ui:
+      enabled: true
+    eric-eo-common-br-agent:
+      enabled: true
+    eric-oss-common-postgres:
+      enabled: true
+    eric-adp-gui-aggregator-service:
+      enabled: true
+    eric-oss-notification-service:
+      enabled: false
+    eric-oss-notification-service-database-pg:
+      enabled: false
+    eric-eo-eai:
+      enabled: false
+    eric-eo-eai-database-pg:
+      enabled: false
+    eric-oss-dmaap:
+      enabled: false
+    eric-eo-subsystem-management:
+      enabled: false
+    eric-eo-subsystem-management-database-pg:
+      enabled: false
+    eric-eo-subsystemsmgmt-ui:
+      enabled: false
+    eric-eo-credential-manager:
+      enabled: false
+    eric-eo-onboarding:
+      enabled: false
+    eric-eo-ecmsol005-adapter:
+      enabled: false
+    eric-pm-kube-state-metrics:
+      enabled: true
+    service-mesh-ingress-gateway:
+      enabled: false
+    service-mesh-egress-gateway:
+      enabled: false
+    eric-dst-query:
+      enabled: false
+    eric-pm-alert-manager:
+      enabled: true
+  eric-oss-function-orchestration-common:
+    eric-eo-lm-consumer:
+      enabled: true
+    eric-eo-fh-event-to-alarm-adapter:
+      enabled: true
+    eric-eo-evnfm-crypto:
+      enabled: true
+    eric-am-onboarding-service:
+      enabled: true
+    evnfm-toscao:
+      enabled: true
+    eric-eo-evnfm-nbi:
+      enabled: true
+    eric-eo-batch-manager:
+      enabled: true

@@ -1,0 +1,69 @@
+# Compiled source #
+*.class
+*/bin/*
+
+# Eclipse files
+.project
+.classpath
+.settings
+.metadata
+
+# IntelliJ IDEA files
+.idea
+*.iws
+*.ipr
+*.iml
+*.patch
+
+# Test output files
+*/test-output/*
+/test-output/
+/test-output
+test-output/
+test-output/**/*
+*/test-output/**/*
+
+# Packages
+*.jar
+
+# Maven build files
+target
+reports
+**/dependency-reduced-pom.xml
+
+# PMD
+.pmd
+
+# Merge files
+*.orig
+
+# tmp directories
+tmp/
+test-output/
+
+# HELM files
+*.tgz
+*.lock
+
+# BOB files
+.bob/
+.project_*
+*helm-target
+helmdrck_temp_*
+
+# ADP files
+artifact.properties
+design-rule-check-report*
+
+# Allure
+allure-results
+allure-report
+
+# CI
+htpasswd
+helm-cred.yaml
+certs/**/*
+certs/
+certs/*
+.cbo_version
+.latest-cbo-version

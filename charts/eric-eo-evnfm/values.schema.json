@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "eric-lcm-container-registry": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "if": {
+        "properties": { "enabled": { "enum": [ null, true ] } }
+      },
+      "then": {
+        "properties": {
+          "ingress": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "hostname": {
+                "type": "string",
+                "format": "hostname"
+              }
+            },
+            "required": [ "hostname" ]
+          },
+          "persistence": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "persistentVolumeClaim": {
+                "type": "object",
+                "additionalProperties": true,
+                "properties": {
+                  "size": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [ "size" ]
+              }
+            },
+            "required": [ "persistentVolumeClaim" ]
+          }},
+        "required": [ "ingress", "persistence" ]
+      }
+    },
+    "eric-lcm-helm-chart-registry": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "if": { "properties": { "enabled": { "enum": [ null, true ] } } },
+      "then": {
+        "required": [ "ingress" ],
+        "properties": {
+          "ingress": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              },
+              "hostname": {
+                "type": "string"
+              }
+            },
+            "required": [ "enabled" ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "global": {
+            "properties": {
+              "geo-redundancy": {
+                "properties": {
+                  "enabled": {
+                    "enum": [
+                      true
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "eric-am-common-wfs" : {
+            "properties": {
+              "dockerRegistry": {
+                "properties": {
+                  "secret": {
+                    "const": "global-registry-secret"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "eric-global-lcm-container-registry"
+        ],
+        "properties": {
+          "eric-global-lcm-container-registry": {
+            "required": [
+              "hostname",
+              "username",
+              "password"
+            ],
+            "properties": {
+              "hostname": {
+                "type": "string",
+                "format": "hostname"
+              },
+              "username": {
+                "type": "string",
+                "minLength": 1
+              },
+              "password": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

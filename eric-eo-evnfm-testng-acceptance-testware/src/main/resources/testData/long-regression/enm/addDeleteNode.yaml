@@ -1,0 +1,102 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "multi-chart-etsi-rel4-cmpv2-enrollment"
+    vnfInstanceName: add-delete-node-testzv-1
+    vnfInstanceDescription: instantiate with only one of Scale Aspect id is set in the targetScaleLevelInfo
+    namespace: add-delete-node-testzv-1-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: true
+    additionalParams:
+      ossTopology.managedElementId: add-delete-node-testzv-1-instantiate
+      ossTopology.nodeIpAddress: <node-ip>
+    valuesFilePart:
+      ossTopology.networkElementVersion: 3.2.0
+      ossTopology.customKey: customValue
+    instantiateOssTopology:
+      managedElementId: add-delete-node-testzv-1-instantiate
+      nodeIpAddress: <node-ip>
+      networkElementPassword: cm9vdA==
+      timeZone: UTC
+      netConfPort: 830
+      networkElementUsername: root
+      networkElementType: vDU
+      networkElementVersion: 3.1.0
+      customKey: customValue
+  - vnfdId: "multi-chart-etsi-rel4-cmpv2-enrollment"
+    vnfInstanceName: add-delete-node-testzv-2
+    vnfInstanceDescription: Example description
+    namespace: add-delete-node-testzv-2-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: true
+    additionalParams:
+      ossTopology.managedElementId: add-delete-node-testzv-2-instantiate
+      ossTopology.nodeIpAddress: <node-ip>
+    valuesFilePart:
+      ossTopology.networkElementVersion: 3.2.0
+      ossTopology.customKey: customValue
+    instantiateOssTopology:
+      managedElementId: add-delete-node-testzv-2-instantiate
+      nodeIpAddress: <node-ip>
+      networkElementPassword: cm9vdA==
+      timeZone: UTC
+      netConfPort: 830
+      networkElementUsername: root
+      networkElementType: vDU
+      networkElementVersion: 3.1.0
+      customKey: customValue
+
+
+cnfToDeleteFromEnmSecondTime:
+  - vnfInstanceName: add-delete-node-testzv-1
+    expectedError:
+      statusCode: CONFLICT
+      message: VNF Instance has not been added to OSS
+  - vnfInstanceName: add-delete-node-testzv-2
+    expectedError:
+      statusCode: CONFLICT
+      message: VNF Instance has not been added to OSS
+
+cnfToAddToEnm:
+  - vnfInstanceName: add-delete-node-testzv-1
+    valuesFilePart:
+      ossTopology.managedElementId: add-delete-node-testzv-1
+  - vnfInstanceName: add-delete-node-testzv-2
+    additionalParams:
+      ossTopology.managedElementId: add-delete-node-testzv-2
+
+cnfToDeleteFromEnmNotAccessible:
+  - vnfInstanceName: add-delete-node-testzv-1
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedError:
+      statusCode: BAD_REQUEST
+      message: Connection to ENM has failed
+  - vnfInstanceName: add-delete-node-testzv-2
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedError:
+      statusCode: BAD_REQUEST
+      message: Connection to ENM has failed

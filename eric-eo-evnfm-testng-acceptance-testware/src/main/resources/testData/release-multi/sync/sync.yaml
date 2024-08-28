@@ -1,0 +1,266 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+    vnfInstanceName: sync-vnf-rest-multi
+    vnfInstanceDescription: Initial VNF Description
+    namespace: sync-vnf-rest-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    applicationTimeout: 600
+    cleanUpResources: false
+    skipVerification: false
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-pm-server.enabled: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    extensions:
+      vnfControlledScaling:
+        VNF-3GPP_5G-UE-AUTH^: ManualControlled
+        50CE_NT-AU_PONT%: ManualControlled
+        CCRC_SO_PHONE-5GCORE-HARD_: ManualControlled
+    scaleInfo:
+      VNF-3GPP_5G-UE-AUTH^: 0
+      50CE_NT-AU_PONT%: 0
+      CCRC_SO_PHONE-5GCORE-HARD_: 0
+    targets:
+      <vnfInstanceName>-test-cnf: 1
+      <vnfInstanceName>-vnfc1: 1
+      <vnfInstanceName>-vnfc2: 1
+      <vnfInstanceName>-vnfc3: 1
+      <vnfInstanceName>-vnfc4: 1
+      <vnfInstanceName>-2-pm-testapp: 1
+      eric-adp-gs-testapp: 1
+      eric-pm-testapp-controller: 1
+      influxdb-service: 1
+      eric-pm-bulk-reporter: 1
+  - vnfdId: "multi-chart-etsi-rel4-b-455379754e37-mixed_vdu"
+    vnfInstanceName: sync-vnf-rest-mixed-vdu-multi
+    vnfInstanceDescription: Initial VNF Description
+    namespace: sync-vnf-rest-mixed-vdu-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    applicationTimeout: 600
+    cleanUpResources: false
+    skipVerification: false
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-pm-server.enabled: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    extensions:
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+      deployableModules:
+        depModule_cnf1: enabled
+        depModule_cnf2: enabled
+        deployable_mdl_cnf1_crd1: disabled
+    scaleInfo:
+      Aspect1: 0
+    targets:
+      <vnfInstanceName>-test-cnf: 1
+      <vnfInstanceName>-vnfc2: 1
+      <vnfInstanceName>-2-pm-testapp: 1
+      eric-adp-gs-testapp: 1
+      eric-pm-testapp-controller: 1
+      influxdb-service: 1
+      eric-pm-bulk-reporter: 1
+  - vnfdId: "multi-chart-rel4-5fcb086597-non-scalable"
+    vnfInstanceName: sync-vnf-rest-non-scalable-vdu-multi
+    vnfInstanceDescription: Initial VNF Description
+    namespace: sync-vnf-rest-non-scalable-vdu-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    applicationTimeout: 600
+    cleanUpResources: false
+    skipVerification: false
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-pm-server.enabled: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+      <vnfInstanceName>-2-pm-testapp: 1
+      eric-adp-gs-testapp: 1
+      eric-pm-testapp-controller: 1
+      influxdb-service: 1
+      eric-pm-bulk-reporter: 1
+
+cnfToScale:
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+    vnfInstanceName: sync-vnf-rest-multi
+    vnfInstanceDescription: Initial VNF Description
+    namespace: sync-vnf-rest-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    applicationTimeout: 600
+    cleanUpResources: false
+    skipVerification: true
+    extensions:
+      VNF-3GPP_5G-UE-AUTH^: ManualControlled
+      50CE_NT-AU_PONT%: CISMControlled
+      CCRC_SO_PHONE-5GCORE-HARD_: ManualControlled
+    scaleInfo:
+      VNF-3GPP_5G-UE-AUTH^: 0
+      50CE_NT-AU_PONT%: 1
+      CCRC_SO_PHONE-5GCORE-HARD_: 0
+    scaleMapping:
+      - aspectId: VNF-3GPP_5G-UE-AUTH^
+        targetToReplicasMap:
+          eric-pm-bulk-reporter: 1
+      - aspectId: 50CE_NT-AU_PONT%
+        targetToReplicasMap:
+          <vnfInstanceName>-vnfc3: 5
+          <vnfInstanceName>-vnfc2: 5
+      - aspectId: CCRC_SO_PHONE-5GCORE-HARD_
+        targetToReplicasMap:
+          <vnfInstanceName>-test-cnf: 1
+          <vnfInstanceName>-vnfc1: 1
+          <vnfInstanceName>-vnfc4: 1
+    targets:
+      <vnfInstanceName>-test-cnf: 1
+      <vnfInstanceName>-vnfc1: 1
+      <vnfInstanceName>-vnfc2: 5
+      <vnfInstanceName>-vnfc3: 5
+      <vnfInstanceName>-vnfc4: 1
+      <vnfInstanceName>-2-pm-testapp: 1
+      eric-adp-gs-testapp: 1
+      eric-pm-testapp-controller: 1
+      influxdb-service: 1
+      eric-pm-bulk-reporter: 1
+    manualUpgrade:
+      - repoName: test-scale-chart
+        releaseName: <vnfInstanceName>
+        chartName: test-scale-chart-5.1.0.tgz
+        values:
+        - vnfc3.replicaCount=5
+        - vnfc3.maxReplicas=5
+        - vnfc3.minReplicas=1
+        - vnfc3.autoscaling.enabled=true
+        - vnfc2.replicaCount=5
+        - vnfc2.maxReplicas=5
+        - vnfc2.minReplicas=1
+        - vnfc2.autoscaling.enabled=true
+  - vnfdId: "multi-chart-etsi-rel4-b-455379754e37-mixed_vdu"
+    vnfInstanceName: sync-vnf-rest-mixed-vdu-multi
+    vnfInstanceDescription: Initial VNF Description
+    namespace: sync-vnf-rest-mixed-vdu-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Failed
+    expectedComponentsState: Running
+    applicationTimeout: 600
+    cleanUpResources: false
+    skipVerification: true
+    extensions:
+      Aspect1: ManualControlled
+    scaleInfo:
+      Aspect1: 0
+    targets:
+      <vnfInstanceName>-test-cnf: 5
+      <vnfInstanceName>-vnfc2: 1
+      <vnfInstanceName>-2-pm-testapp: 1
+      eric-adp-gs-testapp: 1
+      eric-pm-testapp-controller: 1
+      influxdb-service: 1
+      eric-pm-bulk-reporter: 5
+    scaleMapping:
+      - aspectId: Aspect1
+        targetToReplicasMap:
+          eric-pm-bulk-reporter: 1
+    manualUpgrade:
+      - repoName: test-scale-chart
+        releaseName: <vnfInstanceName>
+        chartName: test-scale-chart-4.1.0.tgz
+        values:
+          - vnfc1.test-cnf.replicaCount=5
+      - repoName: spider-app
+        chartName: spider-app-4.1.1.tgz
+        releaseName: <vnfInstanceName>-2
+        values:
+          - eric-pm-bulk-reporter.autoscaling.enabled=true
+          - eric-pm-bulk-reporter.maxReplicas=5
+          - eric-pm-bulk-reporter.minReplicas=1
+          - eric-pm-bulk-reporter.replicaCount=5
+  - vnfdId: "multi-chart-rel4-5fcb086597-non-scalable"
+    vnfInstanceName: sync-vnf-rest-non-scalable-vdu-multi
+    vnfInstanceDescription: Initial VNF Description
+    namespace: sync-vnf-rest-non-scalable-vdu-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Failed
+    expectedComponentsState: Running
+    applicationTimeout: 600
+    cleanUpResources: false
+    skipVerification: true
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+      <vnfInstanceName>-vnfc3: 5
+      <vnfInstanceName>-2-pm-testapp: 1
+      eric-adp-gs-testapp: 1
+      eric-pm-testapp-controller: 1
+      influxdb-service: 1
+      eric-pm-bulk-reporter: 5
+    manualUpgrade:
+      - repoName: test-scale-chart
+        releaseName: <vnfInstanceName>
+        chartName: test-scale-chart-4.0.0.tgz
+        values:
+          - vnfc3.replicaCount=5
+      - repoName: spider-app
+        chartName: spider-app-4.0.1.tgz
+        releaseName: <vnfInstanceName>-2
+        values:
+          - eric-pm-bulk-reporter.autoscaling.enabled=true
+          - eric-pm-bulk-reporter.maxReplicas=5
+          - eric-pm-bulk-reporter.minReplicas=1
+          - eric-pm-bulk-reporter.replicaCount=5
+

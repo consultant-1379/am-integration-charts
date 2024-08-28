@@ -1,0 +1,49 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+  packageName: Ericsson.spider-app-multi-a-v2.1.0.32s.1.0.32
+  vnfInstanceName: backup-rest
+  vnfInstanceDescription: Example description
+  namespace: backup-rest-multi-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 700
+  cleanUpResources: false
+  skipVerification: false
+  additionalParams:
+    bro_endpoint_url: http://eric-ctrl-bro.<namespace>:7001
+    backup-controller.enabled: true
+    global.hosts.bro: bro.test.backup-rest-multi-ns.rnd.gic.ericsson.se
+    bro.ingress.enabled: false
+    influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+    config.nbi.file.enabled: false
+    tags.pm: true
+    eric-adp-gs-testapp.ingress.enabled: false
+    tags.all: false
+    eric-pm-server.server.ingress.enabled: false
+    pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+    eric-adp-gs-testapp.tls.dced.enabled: false
+    eric-pm-server.server.persistentVolume.storageClass: network-block
+    retrieveUnsealKey: false
+
+backupRequest:
+  additionalParams:
+    backupName: "backupTestScope"
+    scope: "DEFAULT"

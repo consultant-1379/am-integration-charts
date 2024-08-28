@@ -1,0 +1,78 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+{{- $serviceMesh := include "eric-eo-evnfm.service-mesh-enabled" . | trim -}}
+{{- $serviceMeshIngress := include "eric-eo-evnfm.service-mesh-ingress-enabled" . | trim -}}
+{{- if and (eq $serviceMesh "true") (eq $serviceMeshIngress "true") }}
+    {{- $containerRegEnabled := false -}}
+    {{- $crEnabledKeyExists := false -}}
+    {{- if hasKey .Values "eric-lcm-container-registry" -}}
+        {{- if hasKey (index .Values "eric-lcm-container-registry") "enabled" -}}
+            {{- $containerRegEnabled = index .Values "eric-lcm-container-registry" "enabled" -}}
+            {{- $crEnabledKeyExists = true -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if not $crEnabledKeyExists -}}
+        {{- if hasKey .Values "services" -}}
+            {{- if hasKey .Values.services "onboarding" -}}
+                {{- if hasKey .Values.services.onboarding "enabled" -}}
+                    {{- $containerRegEnabled = .Values.services.onboarding.enabled -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- if $containerRegEnabled -}}
+{{- if index .Values "eric-lcm-container-registry" "ingress" "enabled" }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ template "eric-eo-evnfm.name" . }}-lcm-container-registry-virtualservice
+  annotations:
+  {{- include "eric-eo-evnfm.helm-annotations" .| nindent 4 }}
+  labels:
+  {{- include "eric-eo-evnfm.kubernetes-io-info" .| nindent 4 }}
+spec:
+  gateways:
+  - {{ template "eric-eo-evnfm.name" . }}-lcm-container-registry-gateway
+  hosts:
+  - {{ index .Values "eric-lcm-container-registry" "ingress" "hostname"  | quote }}
+  http:
+  - name: "v2"
+    match:
+    - uri:
+        prefix: /v2
+    timeout: 1800s
+    route:
+    - destination:
+        host: eric-lcm-container-registry-registry
+        port:
+          number: {{ index .Values "eric-lcm-container-registry" "registry" "service" "port" }}
+      headers:
+        response:
+          set:
+            Strict-Transport-Security: max-age=31536000; includeSubDomains
+  - name: "metrics"
+    match:
+    - uri:
+        prefix: /metrics
+    route:
+    - destination:
+        host: eric-lcm-container-registry-registry
+        port:
+          number: {{ index .Values "eric-lcm-container-registry" "sidecar" "port" }}
+{{- end }}
+{{- end }}
+{{- end }}

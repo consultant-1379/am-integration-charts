@@ -1,0 +1,11 @@
+{
+  "general": {
+    "apiGatewayHost": "https://<GATEWAY_HOST>",
+    "idamHost": "https://<KEYCLOAK_HOST>",
+    "idamAdminUsername": "<IDAM_ADMIN_USERNAME>",
+    "idamAdminPassword": "<IDAM_ADMIN_PASSWORD>",
+    "idamRealm": "master",
+    "idamClient": "eo",
+    "idamClientSecret": "<KEYCLOAK_CLIENT_SECRET>"
+  }
+}

@@ -1,0 +1,162 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+    vnfInstanceName: lcm-non-default-flags-1
+    vnfInstanceDescription: Example description
+    namespace: lcm-non-default-flags-1-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      eric-pm-server.enabled: false
+      skipJobVerification: true
+      helmNoHooks: true
+      disableOpenapiValidation: false
+      manoControlledScaling: true
+      helmHook.enabled: true
+      helmHook.deletePolicy: hook-failed
+      helmHook.command: exit 1
+      job.enabled: true
+      job.ttlSecondsAfterFinished: 1200
+      job.command: exit 1
+      35: 67
+      keyWithEmptyValue:
+      keyWithEmptyString: ""
+      keyWithEmptyObject: {}
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    valuesFilePart:
+      keyWithNullValue: null
+      keyWithEmptyList: []
+    expectedHelmValues:
+      35: 67
+      keyWithEmptyString: ""
+      keyWithEmptyList: []
+      keyWithEmptyObject: {}
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+    vnfInstanceName: lcm-non-default-flags-2
+    vnfInstanceDescription: Example description
+    namespace: lcm-non-default-flags-2-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      eric-pm-server.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+    vnfInstanceName: lcm-non-default-flags-3
+    vnfInstanceDescription: Example description
+    namespace: lcm-non-default-flags-3-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      eric-pm-server.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+
+cnfToUpgrade:
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+    vnfInstanceName: lcm-non-default-flags-2
+    vnfInstanceDescription: Example description
+    namespace: lcm-non-default-flags-2-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      eric-pm-server.enabled: false
+      skipJobVerification: true
+      helmNoHooks: true
+      disableOpenapiValidation: false
+      helmHook.enabled: true
+      helmHook.deletePolicy: hook-failed
+      helmHook.command: exit 1
+      job.enabled: true
+      job.ttlSecondsAfterFinished: 1200
+      job.command: exit 1
+      35: 67
+      keyWithEmptyValue:
+      keyWithEmptyString: ""
+      keyWithEmptyObject: {}
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    valuesFilePart:
+      keyWithNullValue: null
+      keyWithEmptyList: []
+    expectedHelmValues:
+      35: 67
+      keyWithEmptyString: ""
+      keyWithEmptyList: []
+      keyWithEmptyObject: {}
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+    vnfInstanceName: lcm-non-default-flags-3
+    vnfInstanceDescription: Example description
+    namespace: lcm-non-default-flags-3-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    skipVerification: true
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      eric-pm-server.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false

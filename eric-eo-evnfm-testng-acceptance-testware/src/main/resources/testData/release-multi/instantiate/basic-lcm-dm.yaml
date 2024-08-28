@@ -1,0 +1,348 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+    vnfInstanceName: basic-lcm-dm-multi
+    vnfInstanceDescription: Example description
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    cleanUpResources: true
+    skipVerification: false
+    applicationTimeout: 600
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+      retrieveUnsealKey: false
+    targetScaleLevelInfo:
+      - aspectId: Aspect1
+        scaleLevel: 3
+    scaleInfo:
+      Aspect1: 3
+      Aspect2: 0
+      Aspect3: 0
+      Aspect5: 0
+    extensions:
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+        Aspect3: ManualControlled
+        Aspect5: ManualControlled
+      deployableModules:
+        depModule_cnf1: disabled
+        depModule_cnf2: enabled
+    expectedHelmHistory:
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      eric-pm-bulk-reporter: 4
+
+cnfToUpgrade:
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h500"
+    vnfInstanceName: basic-lcm-dm-multi
+    vnfInstanceDescription: Example description
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    cleanUpResources: true
+    skipVerification: false
+    applicationTimeout: 600
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+    scaleInfo:
+      Aspect1: 3
+      Aspect2: 0
+      Aspect4: 0
+    extensions:
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+        Aspect4: ManualControlled
+      deployableModules:
+        depModule_cnf1: disabled
+        depModule_cnf2: enabled
+        deployable_mdl_cnf1_crd1: disabled
+    expectedHelmHistory:
+      spider-app:
+        - revision: "1"
+          description: Install complete
+        - revision: "2"
+          description: Upgrade complete
+    targets:
+      eric-pm-bulk-reporter: 4
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h500"
+    vnfInstanceName: basic-lcm-dm-multi
+    vnfInstanceDescription: Example description
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    cleanUpResources: true
+    skipVerification: false
+    applicationTimeout: 600
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+    scaleInfo:
+      Aspect1: 3
+      Aspect2: 0
+      Aspect4: 0
+    extensions:
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+        Aspect4: ManualControlled
+      deployableModules:
+        depModule_cnf1: enabled
+        depModule_cnf2: disabled
+        deployable_mdl_cnf1_crd1: disabled
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h500"
+    vnfInstanceName: basic-lcm-dm-multi
+    vnfInstanceDescription: Example description
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    cleanUpResources: true
+    skipVerification: false
+    applicationTimeout: 600
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+      persistDMConfig: true
+    scaleInfo:
+      Aspect1: 3
+      Aspect2: 0
+      Aspect4: 0
+    extensions:
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+        Aspect4: ManualControlled
+      deployableModules:
+        depModule_cnf1: disabled
+        depModule_cnf2: enabled
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+        - revision: "2"
+          description: Upgrade complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+
+scaleConfigAspect1OutRequest:
+  type: SCALE_OUT
+  aspectId: Aspect1
+  numberOfSteps: 1
+  additionalParams:
+    applicationTimeout: 600
+
+scaleConfigAspect2OutRequest:
+  type: SCALE_OUT
+  aspectId: Aspect2
+  numberOfSteps: 1
+  additionalParams:
+    applicationTimeOut: 600
+
+scaleConfigAspect1InRequest:
+  type: SCALE_IN
+  aspectId: Aspect1
+  numberOfSteps: 1
+  additionalParams:
+    applicationTimeOut: 600
+
+scaleConfigAspect2InRequest:
+  type: SCALE_IN
+  aspectId: Aspect2
+  numberOfSteps: 1
+  additionalParams:
+    applicationTimeOut: 600
+
+additionalCnfDataForScaleOutAspect1Operation:
+  - expectedOperationState: ROLLED_BACK
+    targets: {}
+
+additionalCnfDataForScaleOutAspect2Operation:
+  - aspectToScale: Aspect2
+    stepsToScale: 1
+    scaleInfo:
+      Aspect1: 3
+      Aspect2: 1
+      Aspect4: 0
+    vnfInstanceName: basic-lcm-dm-multi
+    targets:
+      <vnfInstanceName>-vnfc2: 5
+      <vnfInstanceName>-vnfc3: 5
+
+additionalCnfDataForScaleInAspect1Operation:
+  - expectedOperationState: ROLLED_BACK
+    targets: {}
+
+additionalCnfDataForScaleInAspect2Operation:
+  - aspectToScale: Aspect2
+    stepsToScale: 1
+    scaleInfo:
+      Aspect1: 3
+      Aspect2: 0
+      Aspect4: 0
+    vnfInstanceName: basic-lcm-dm-multi
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+      <vnfInstanceName>-vnfc3: 1
+
+helmHistoryForFirstScaleOperation:
+  expectedHelmHistory:
+    test-scale-chart:
+      - revision: "1"
+        description: Install complete
+      - revision: "2"
+        description: Upgrade complete
+
+helmHistoryForSecondScaleOperation:
+  expectedHelmHistory:
+    test-scale-chart:
+      - revision: "1"
+        description: Install complete
+      - revision: "2"
+        description: Upgrade complete
+      - revision: "3"
+        description: Upgrade complete
+
+cnfToModify:
+  - vnfInstanceName: basic-lcm-dm-multi
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    extensions:
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+        Aspect2: CISMControlled
+        Aspect4: ManualControlled
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+        - revision: "2"
+          description: Upgrade complete
+        - revision: "3"
+          description: Upgrade complete
+        - revision: "4"
+          description: Upgrade complete
+    targets: {}
+  - vnfInstanceName: basic-lcm-dm-multi
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    extensions:
+      vnfControlledScaling:
+        Aspect1: CISMControlled
+        Aspect2: CISMControlled
+        Aspect4: ManualControlled
+    expectedOperationState: ROLLED_BACK
+    targets: {}
+
+cnfToSync:
+  - vnfInstanceName: basic-lcm-dm-multi
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: COMPLETED
+    applicationTimeout: 600
+    extensions:
+      Aspect1: ManualControlled
+      Aspect2: CISMControlled
+      Aspect4: ManualControlled
+    scaleInfo:
+      Aspect1: 3
+      Aspect2: 0
+      Aspect4: 0
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+      <vnfInstanceName>-vnfc3: 1
+
+cnfToHeal:
+  - vnfInstanceName: basic-lcm-dm-multi
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    additionalParams:
+      restore.scope: DEFAULT
+      restore.backupName: test
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+    targets: {}
+
+cnfToRollback:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+    sourceVnfdId: "multi-chart-569d-xyz3-5g15f7h500"
+    vnfInstanceName: basic-lcm-dm-multi
+    namespace: basic-lcm-dm-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedHelmHistory:
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      eric-pm-bulk-reporter: 4

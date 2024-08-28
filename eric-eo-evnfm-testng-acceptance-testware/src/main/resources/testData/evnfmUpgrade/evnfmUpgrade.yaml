@@ -1,0 +1,30 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+evnfmUpgrade:
+  helmRepoUrl: ${EO_HELM_REPO_URL:-https://arm.epk.ericsson.se/artifactory/proj-eo-helm}
+  helmRepoName: ${EO_HELM_REPO_NAME:-eric-eo} #Optional: default: eric-eo
+  chart: ${CHART_NAME:-eric-eo}
+  releaseName: ${SERVICE_NAME:-eric-eo-evnfm}-latesttesting   #Optional: default: upgrade-release
+  namespace: ${NAMESPACE:-}  #Optional: default: evnfm-upgrade
+  cluster:
+    localPath: ${KUBE_CONFIG_PATH}
+  install:
+    chartVersion: ${EO_CHART_VERSION_INSTALL:-1.24.1-365} # Sprint 21.0 1.25.0-50
+    valuesFile: evnfmUpgrade/valuesFiles/valuesInstall.yaml
+  upgrade:
+    chartVersion: ${EO_CHART_VERSION_UPGRADE:-} # if chart version is not present, it will use the latest chart for install/upgrade
+    valuesFile: evnfmUpgrade/valuesFiles/valuesUpgrade.yaml

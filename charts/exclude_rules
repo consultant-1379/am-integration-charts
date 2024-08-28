@@ -1,0 +1,14 @@
+-DhelmDesignRule.setValue.eric-am-common-wfs="ingress.host=host;service.account=account"
+-DhelmDesignRule.setValue.eric-am-common-wfs-ui="ingress.enabled=false"
+-DhelmDesignRule.setValue.eric-vnfm-orchestrator-service="global.hosts.vnfm=host;ingress.host=host"
+-DhelmDesignRule.setValue.eric-data-document-database-pg="credentials.kubernetesSecretName=custom"
+-DhelmDesignRule.setValue.eric-eo-evnfm="global.hosts.vnfm=a;global.hosts.iam=a;global.geo-redundancy.enabled=false;eric-sec-access-mgmt.ingress.hostname=a;eric-eo-api-gateway.iam.uri=uri/werw;eric-lcm-container-registry.ingress.hostname=ingress;eric-lcm-container-registry.ingress.tls.secretName=secret;eric-lcm-helm-chart-registry.ingress.hostname=ingress;eric-eo-api-gateway.iam.uri=uri/uri;global.hosts.vnfm=vnfm;global.registry.pullSecret=sample;eric-eo-usermgmt.iam.admin.url=dummy"
+-DhelmDesignRule.setValue.eric-evnfm-rbac="defaultUser.username=vnfm;defaultUser.password=vnfm"
+-DhelmDesignRule.setValue.eric-eo-evnfm-nbi="eric-evnfm-rbac.defaultUser.username=vnfm;eric-evnfm-rbac.defaultUser.password=vnfm"
+-DhelmDesignRule.setValue.eric-eo="eric-eo-evnfm-nbi.eric-evnfm-rbac.defaultUser.username=vnfm;eric-eo-evnfm-nbi.eric-evnfm-rbac.defaultUser.password=vnfm"
+-DhelmDesignRule.config.eric-eo-evnfm.DR-D470222-010=skip
+-DhelmDesignRule.config.eric-lcm-helm-chart-registry.DR-D1120-025=skip
+-DhelmDesignRule.config.eric-lcm-helm-chart-registry.DR-D1120-090=skip
+-DhelmDesignRule.config.eric-lcm-container-registry.DR-D1120-090=skip
+-DhelmDesignRule.config.eric-data-document-database-pg.DR-D1123-133=skip
+-DhelmDesignRule.setValue.eric-log-shipper="global.logShipper.deployment.type=daemonset"

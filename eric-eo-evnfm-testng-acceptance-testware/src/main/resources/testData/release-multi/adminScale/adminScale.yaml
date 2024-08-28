@@ -1,0 +1,159 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a383"
+  packageName: Ericsson.spider-app-multi-a-v2.1.0.24s.1.0.24
+  vnfInstanceName: admin-scale-ui
+  vnfInstanceDescription: Example description
+  namespace: admin-scale-multi-ui-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 600
+  instantiationLevel: instantiation_level_2
+  extensions:
+    VNF-3GPP_5G-UE-AUTH^: CISMControlled
+    50CE_NT-AU_PONT%: ManualControlled
+    UA-VNF-14PP#: ManualControlled
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: CISMControlled
+  cleanUpResources: false
+  skipVerification: false
+  additionalParams:
+    eric-pm-server.enabled: false
+  targets: # Targets should not be part of EvnfmCnf Model, this is not a parameter, this is a result (SM-98579)
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 1
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-vnfc5: 2
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 1
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    VNF-3GPP_5G-UE-AUTH^: 0
+    50CE_NT-AU_PONT%: 0
+    UA-VNF-14PP#: 0
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: 1
+
+cnfToScale:
+  vnfInstanceName: admin-scale-ui
+  namespace: admin-scale-multi-ui-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  packageName: Ericsson.spider-app-multi-a-v2.1.0.24s.1.0.24
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 600
+  aspectToScale: VNF-3GPP_5G-UE-AUTH^
+  stepsToScale: 1
+  extensions:
+    VNF-3GPP_5G-UE-AUTH^: CISMControlled
+    50CE_NT-AU_PONT%: ManualControlled
+    UA-VNF-14PP#: ManualControlled
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: CISMControlled
+  cleanUpResources: false
+  skipVerification: false
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 1
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-vnfc5: 2
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    VNF-3GPP_5G-UE-AUTH^: 1
+    50CE_NT-AU_PONT%: 0
+    UA-VNF-14PP#: 0
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: 1
+
+cnfToUpgrade:
+  vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+  packageName: Ericsson.spider-app-multi-b-v2.1.0.26s.1.0.26
+  vnfInstanceName: admin-scale-ui
+  namespace: admin-scale-multi-ui-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  vnfInstanceDescription: Example description
+  applicationTimeout: 600
+  expectedOperationState: Completed
+  cleanUpResources: false
+  skipVerification: false
+  additionalParams:
+    eric-pm-server.enabled: false
+  extensions:
+    VNF-3GPP_5G-UE-AUTH^: CISMControlled
+    50CE_NT-AU_PONT%: ManualControlled
+    CCRC_SO_PHONE-5GCORE-HARD_: ManualControlled
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 5
+    <vnfInstanceName>-vnfc3: 5
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    VNF-3GPP_5G-UE-AUTH^: 1
+    50CE_NT-AU_PONT%: 1
+    CCRC_SO_PHONE-5GCORE-HARD_: 0
+
+cnfToRollback:
+  vnfInstanceName: admin-scale-ui
+  namespace: admin-scale-multi-ui-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH:-default}"
+  packageName: Ericsson.spider-app-multi-a-v2.1.0.24s.1.0.24
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 600
+  aspectToScale: VNF-3GPP_5G-UE-AUTH^
+  stepsToScale: 1
+  extensions:
+    VNF-3GPP_5G-UE-AUTH^: CISMControlled
+    50CE_NT-AU_PONT%: ManualControlled
+    UA-VNF-14PP#: ManualControlled
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: CISMControlled
+  cleanUpResources: false
+  skipVerification: false
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 1
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    VNF-3GPP_5G-UE-AUTH^: 1
+    50CE_NT-AU_PONT%: 0
+    UA-VNF-14PP#: 0
+    I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: 1

@@ -1,0 +1,72 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+# Default values for eric-eo-evnfm.
+# Information on why these values are required are contained within the README.md file.
+global:
+  iamClientSecretEnabled: false
+  networkPolicy:
+    enabled: false
+eric-am-onboarding-service:
+  ingress:
+    enabled: true
+eric-am-common-wfs:
+  ingress:
+    enabled: true
+  service:
+    account: evnfm
+  autoConfigureHelm:
+    enabled: true
+  autoConfigureDocker:
+    enabled: true
+
+eric-lcm-container-registry:
+  ingress:
+    enabled: true
+  daemonSet:
+    enabled: true
+  persistence:
+    persistentVolumeClaim:
+      size: 10Gi
+
+eric-lcm-helm-chart-registry:
+  ingress:
+    enabled: false
+
+eric-vnfm-orchestrator-service:
+  ingress:
+    enabled: true
+  service:
+    account: evnfm
+
+tags:
+  ui: false
+  gateway: false
+
+eric-pm-server:
+  enabled: false
+eric-data-search-engine:
+  enabled: false
+eric-log-shipper:
+  enabled: false
+eric-log-transformer:
+  enabled: false
+eric-data-search-engine-curator:
+  enabled: false
+eric-data-visualizer-kb:
+  enabled: false
+evnfm-toscao:
+  enabled: false

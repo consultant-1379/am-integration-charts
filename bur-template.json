@@ -1,0 +1,83 @@
+{
+  "general": {
+    "apiGatewayHost": "https://<GATEWAY_HOST>",
+    "vnfmUsername": "<USERNAME>",
+    "vnfmPassword": "<PASSWORD>"
+  },
+  "onboarding": {
+    "csarDownloadPath": "/home/amadm100/release-testing-csars",
+    "packages": [
+      {
+        "packageName": "/home/amadm100/release-testing-csars/spider-app-a-1.0.0.csar",
+        "vnfdId": "b0b99535-28a1-4531-9c12-7d194b660543",
+        "operation": "instantiate",
+        "testType": "rest",
+        "isContainerVerification": false,
+        "phase": 1
+      },
+      {
+        "packageName": "/home/amadm100/release-testing-csars/spider-app-b-1.0.0.csar",
+        "vnfdId": "36ff67a9-0de4-48f9-97a3-4b0661670934",
+        "packageBeingUpgraded": "b0b99535-28a1-4531-9c12-7d194b660543",
+        "operation": "instantiate",
+        "testType": "ui",
+        "isContainerVerification": true,
+        "phase": 1
+
+      },
+      {
+        "packageName": "/home/amadm100/release-testing-csars/spider-app-c-1.0.0.csar",
+        "vnfdId": "2ce9484e-85e5-49b7-ac97-445379754e37",
+        "packageBeingUpgraded": "36ff67a9-0de4-48f9-97a3-4b0661670934",
+        "operation": "upgrade",
+        "testType": "ui",
+        "isContainerVerification": true,
+        "phase": 2
+      }
+    ]
+  },
+  "cluster": {
+    "externalConfigFile": "src/main/resources/external_admin.config"
+  },
+  "instantiate": {
+    "cluster": "external_admin",
+    "namespace": "release-test-vnf",
+    "releaseName": "release-test-vnf",
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running",
+    "additionalAttributes": {
+      "tags.all": false,
+      "tags.pm": true,
+      "eric-adp-gs-testapp.ingress.enabled": false,
+      "eric-pm-server.server.ingress.enabled": false,
+      "influxdb.ext.apiAccessHostname": "influxdb-service2",
+      "pm-testapp.ingress.domain": "server",
+      "eric-pm-server.server.persistentVolume.storageClass": "network-block"
+    }
+  },
+  "upgrade": {
+    "additionalAttributes": {
+      "tags.all": false,
+      "tags.pm": true,
+      "eric-adp-gs-testapp.ingress.enabled": false,
+      "eric-pm-server.server.ingress.enabled": false,
+      "influxdb.ext.apiAccessHostname": "influxdb-service2",
+      "pm-testapp.ingress.domain": "server",
+      "upgrade.downsize.allowed": false
+    },
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running"
+  },
+  "scale": {
+    "aspectId": "Aspect1",
+    "deployments": {
+      "eric-pm-bulk-reporter": "2"
+    },
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running"
+  },
+  "terminate": {
+    "terminationType": "FORCEFUL",
+    "expectedOperationState": "Completed"
+  }
+}

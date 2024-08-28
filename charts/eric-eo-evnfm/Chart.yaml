@@ -1,0 +1,46 @@
+apiVersion: v2
+dependencies:
+- name: eric-am-common-wfs
+  repository: https://arm.seli.gic.ericsson.se/artifactory/proj-eo-evnfm-helm/
+  tags:
+  - wfs
+  version: 1.415.0-5
+- condition: eric-lcm-container-registry.enabled,services.onboarding.enabled
+  name: eric-lcm-container-registry
+  repository: https://arm.sero.gic.ericsson.se/artifactory/proj-adp-gs-all-helm/
+  tags:
+  - onboarding
+  version: 8.3.0+6
+- condition: eric-lcm-helm-chart-registry.enabled,services.onboarding.enabled
+  name: eric-lcm-helm-chart-registry
+  repository: https://arm.sero.gic.ericsson.se/artifactory/proj-adp-gs-all-helm/
+  tags:
+  - onboarding
+  version: 7.3.0+3
+- name: eric-am-common-wfs-ui
+  repository: https://arm.seli.gic.ericsson.se/artifactory/proj-eo-evnfm-helm/
+  tags:
+  - ui
+  version: 0.390.0-4
+- alias: application-manager-postgres
+  name: eric-data-document-database-pg
+  repository: https://arm.sero.gic.ericsson.se/artifactory/proj-adp-gs-all-helm/
+  version: 9.3.0+30
+- name: eric-vnfm-orchestrator-service
+  repository: https://arm.seli.gic.ericsson.se/artifactory/proj-eo-evnfm-helm/
+  tags:
+  - orchestrator
+  version: 0.1099.0-4
+- import-values:
+  - child: logShipper.config
+    parent: global.logShipper.config
+  name: eric-log-shipper
+  repository: https://arm.sero.gic.ericsson.se/artifactory/proj-adp-gs-all-helm/
+  version: 19.5.0+8
+- import-values: []
+  name: eric-eo-evnfm-library-chart
+  repository: https://arm.seli.gic.ericsson.se/artifactory/proj-eo-evnfm-helm-local
+  version: 0.37.0-1
+description: An integration Helm chart for ADP AM Onboarding & Common Workflow Services
+name: eric-eo-evnfm
+version: 2.49.0-14

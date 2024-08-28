@@ -1,0 +1,27 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+packages:
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/b/spider-app-multi-b-v2/spider-app-multi-b-v2/1.0.32/spider-app-multi-b-v2-1.0.32.csar"
+    vnfdId: "multi-chart-569d-xyz3-5g15f7h499"
+    vnfdFile: "spider-app-multi-b-v2.yaml"
+    skipImageUpload: false
+    timeOut: 15
+    packageSecurityOption: UNSIGNED
+
+clusterConfig:
+  localPath: "${KUBE_CONFIG_PATH:-hahn062.config}"
+  description: "Valid cluster config pointing to external cluster"

@@ -1,0 +1,95 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+    vnfInstanceName: instantiate-same-ns-cnf1-multi
+    vnfInstanceDescription: Example description
+    namespace: instantiate-same-ns-multi-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    applicationTimeOut: 600
+    cleanUpResources: false
+    skipVerification: false
+    additionalParams:
+      config.nbi.file.enabled: false
+      tags.pm: true
+      tags.all: false
+      retrieveUnsealKey: false
+    scaleInfo: {}
+    extensions:
+      deployableModules:
+        depModule_cnf1: enabled
+        depModule_cnf2: disabled
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+        Aspect3: ManualControlled
+        Aspect5: CISMControlled
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+    vnfInstanceName: instantiate-same-ns-cnf2-multi
+    vnfInstanceDescription: Example description
+    namespace: instantiate-same-ns-multi-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: false
+    applicationTimeOut: 600
+    skipVerification: false
+    additionalParams:
+      config.nbi.file.enabled: false
+      tags.pm: true
+      tags.all: false
+      retrieveUnsealKey: false
+    scaleInfo: {}
+    extensions:
+      deployableModules:
+        depModule_cnf1: enabled
+        depModule_cnf2: disabled
+      vnfControlledScaling:
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+        Aspect3: ManualControlled
+        Aspect5: CISMControlled
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+
+cnfToTerminate:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+    vnfInstanceName: instantiate-same-ns-cnf1-multi
+    vnfInstanceDescription: Example description
+    namespace: instantiate-same-ns-multi-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    cleanUpResources: true
+    applicationTimeOut: 600
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete

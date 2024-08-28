@@ -1,0 +1,205 @@
+{
+  "general": {
+    "apiGatewayHost": "https://evnfm.release-env-evnfm.hahn062.rnd.gic.ericsson.se",
+    "vnfmUsername": "vnfm",
+    "vnfmPassword": "ciTesting123!",
+    "pageLoadTimeout": 10,
+    "idamHost": "https://keycloak.release-env-evnfm.hahn062.rnd.gic.ericsson.se",
+    "idamAdminUsername": "admin",
+    "idamAdminPassword": "ciTesting123!",
+    "idamRealm": "master",
+    "idamClient": "eo",
+    "idamClientSecret": "YezsKiyoKacm6,"
+  },
+  "onboarding": {
+    "csarDownloadPath": "/home/amadm100/release-testing-csars",
+    "packages": [
+      {
+        "packageName": "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/a/spider-app-multi-a-v2/spider-app-multi-a-v2/1.0.23/spider-app-multi-a-v2-1.0.23.csar",
+        "vnfdId": "multi-chart-477c-aab3-2b04e6a383",
+        "operation": "instantiate",
+        "testType": "rest",
+        "isContainerVerification": false,
+        "numberCharts": 2,
+        "phase": 1
+      },
+      {
+        "packageName": "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/b/spider-app-multi-b-v2/spider-app-multi-b-v2/1.0.25/spider-app-multi-b-v2-1.0.25.csar",
+        "vnfdId": "multi-chart-569d-xyz3-5g15f7h499",
+        "packageBeingUpgraded": "multi-chart-477c-aab3-2b04e6a383",
+        "operation": "upgrade",
+        "testType": "rest",
+        "isContainerVerification": false,
+        "numberCharts": 2,
+        "phase": 2
+      },
+      {
+        "packageName": "https://arm901-eiffel052.athtem.eei.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/single/spider-app-b/spider-app-b/1.0.28/spider-app-b-1.0.28-imageless.csar",
+        "vnfdId": "36ff67a9-0de4-48f9-97a3-4b0661670934",
+        "operation": "instantiate",
+        "testType": "ui",
+        "isContainerVerification": true,
+        "skipImageUpload": true
+      },
+      {
+        "packageName": "https://arm901-eiffel052.athtem.eei.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/single/spider-app-c/spider-app-c/1.0.29/spider-app-c-1.0.29-imageless.csar",
+        "vnfdId": "2ce9484e-85e5-49b7-ac97-445379754e37",
+        "packageBeingUpgraded": "36ff67a9-0de4-48f9-97a3-4b0661670934",
+        "operation": "upgrade",
+        "testType": "ui",
+        "multiYaml": true,
+        "isContainerVerification": true,
+        "skipImageUpload": true
+      }
+    ]
+  },
+  "cluster": {
+    "externalConfigFile": "src/main/resources/external_admin.config"
+  },
+  "instantiate": {
+    "cluster": "external_admin",
+    "namespace": "release-test-vnf",
+    "releaseName": "release-test-vnf",
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running",
+    "applicationTimeOut": "600",
+    "day0configuration": {
+      "secrets": [
+        {
+          "name": "day0-secret",
+          "data": {
+            "key1": "value1",
+            "key2": "value2"
+          }
+        },
+        {
+          "name": "secret1",
+          "data": {
+            "key3": "value3",
+            "key4": "value4"
+          }
+        },
+        {
+          "name": "secret2",
+          "data": {
+            "key5": "value5",
+            "key6": "value6"
+          }
+        }
+      ]
+    },
+    "configurations": [
+      {
+        "name": "spider-app-file-config",
+        "verify": [
+          {
+            "key": "config.json",
+            "attributeKey": "config.nbi.file.json.configMap"
+          },
+          {
+            "key": "config.conf",
+            "attributeKey": "config.nbi.file.script.configMap"
+          },
+          {
+            "key": "config.xml",
+            "attributeKey": "config.nbi.file.xml.configMap"
+          }
+        ]
+      }
+    ],
+    "additionalAttributesFile": "src/main/resources/instantiate-values.yaml",
+    "additionalAttributes": {
+      "tags.all": false,
+      "cleanUpResources": false,
+      "helmNoHooks": false,
+      "manoControlledScaling": false,
+      "skipVerification": false,
+      "tags.pm": true,
+      "eric-adp-gs-testapp.ingress.enabled": false,
+      "eric-pm-server.server.ingress.enabled": false,
+      "influxdb.ext.apiAccessHostname": "influxdb-service2-instantiate",
+      "pm-testapp.ingress.domain": "server-instantiate",
+      "values.yaml": "{\"eric-pm-server\":{\"server\":{\"persistentVolume\":{\"storageClass\": \"network-block\"}}}}",
+      "eric-pm-server.server.persistentVolume.storageClass": "network-block",
+      "eric-adp-gs-testapp.tls.dced.enabled": false,
+      "config.nbi.file.enabled": true,
+      "config.nbi.file.json.configMap": "{\"ipconfig-instantiate\": \"192.168.1.10\/16\",\n\"params-instantiate\": {\"test-instantiate\": \"config-instantiate\"},\n\"array-instantiate\": [{\"traceNumber-instantiate\": 12}]}",
+      "config.nbi.file.script.configMap": "!/bin/sh -f\n\nset -x\n\ngsh modify_ne -ni p4-pcc-1 -mgi 1 -mc 4 -ari 1 -asi 4 -ap 1\n\ngsh create_imsins -imsi 24080 -rs home -dn mnc080.mcc240.gprs -np e214 -ac true -na international -rd 5 -ad 86582 -m1 NULL -m2 NULL -m3 NULL -eplp NULL -rn ericsson.se -hn esm -s8 gtp -gcc NULL -wcc NULL -lcc NULL -rfsp NULL -arph 1 -arpm 2 -gss gr -vlbo NULL -aifv true -mavs 1 -mavr 2 -earplr 0 -st true -sra noaction -ssc NULL -iess NULL -pcr false -sps8 NULL -ivss NULL -sdssc none -qpmll NULL -srgr true -uut NULL -nia denied -drcl 0 -urcl 0 -vlbaoi NULL -iri NULL -crs allowed_cs_service -arpnl NULL -qpmw 1 -qpmg 1 -mps NULL\ngsh create_plmn -mcc 240 -mnc 80 -pn 24080 -fnn NULL -snn NULL -ci false -me false -s5 gtp -local true -voip no -sl true -nbt NULL -urcl 0 -drcl 0 -tr NULL -ecvh true -gswgli off\n\ngsh create_inbound_pf_policy -ifp ETH_1_1_1_0_Default\ngsh create_inbound_pf_rule -ifp ETH_1_1_1_0_Default -fr 1 -r permit -p ip -d NULL -dm NULL -sip 0.0.0.0 -sipm 0.0.0.0 -dip 0.0.0.0 -dipm 0.0.0.0 -pp 0 -ppq gt -ipo true -sp 0 -spq gt -dp 0 -dpq gt -tf NULL -tfm NULL -it 0 -itq gt -sd NULL -lt false\n\ngsh create_ip_interface -ifn ETH_1_1_1_0_Default -ip 21.30.1.21 -mask 255.255.255.0 -rip NULL -eqp 1.1 -ep 1 -vid 0 -ifp ETH_1_1_1_0_Default -nw Default\ngsh create_router_instance -eqp 1.1 -nw Default -ip NULL -sn NULL -sc NULL -sl NULL\ngsh create_static_route -eqp 1.1 -nw Default -dip 0.0.0.0 -mask 0.0.0.0 -gip 21.30.1.254\n\n/tmp/DPE_SC/LoadUnits/ttx/int/bin/set_sysprop pcf_available false\n\n# Static GW selection\ngsh modify_node_function -name static_gw_selection -state on\ngsh create_ga -gan GA1\ngsh create_ga_ta_range -gan GA1 -tan GA1_TA2 -mcc 240 -mnc 80 -first 0 -last 65535\n\ngsh modify_subscriber_authentication -mavp off -savp off\n\ngsh modify_feature_state -fsi mme_pool -fs ACTIVATED\n\ngsh modify_node_function -name dns_prior_to_static_gw_selection -state on\n\ngsh create_dns -dn epc.mnc080.mcc240.3gppnetwork.org. -qt recursive -ct 604800 -lct 300 -dcm central\ngsh create_dns_server -dn epc.mnc080.mcc240.3gppnetwork.org. -ns dallas.ericsson.se.\ngsh create_dns_server_address -dn epc.mnc080.mcc240.3gppnetwork.org. -ns dallas.ericsson.se. -ip 10.81.112.49",
+      "config.nbi.file.xml.configMap": "<config xmlns=\"http://tail-f.com/ns/config/1.0\">\n              <epg xmlns=\"urn:rdns:com:ericsson:oammodel:ericsson-epg\">\n                <sgw>\n                  <node>p4-pcc-2-sgw</node>\n                  <interface>\n                    <sx>\n                      <logical-interface>sx-a-if</logical-interface>\n                    </sx>\n                  </interface>\n                  <user-plane>\n                  </user-plane>\n                  <user-plane-pool>\n                    <pool>\n                      <name>sgw-upf-pool</name>\n                      <node-name>\n                        <name>p4-pcg-1</name>\n                      </node-name>\n                    </pool>\n                  </user-plane-pool>\n                  <user-plane-selection>\n                    <default-pool>sgw-upf-pool</default-pool>\n                  </user-plane-selection>\n                  <charging>\n                    <characteristics>\n                      <default-profile>0</default-profile>\n                      <ignore-profile-from-serving-node/>\n                      <profile>\n                        <name>0</name>\n                        <no-cdr-generation/>\n                      </profile>\n                    </characteristics>\n                  </charging>\n                </sgw>\n                <routing-instances>\n                  <routing-instance>\n                    <name>default</name>\n                  </routing-instance>\n                </routing-instances>\n              </epg>\n              <aaa xmlns=\"http://tail-f.com/ns/aaa/1.1\">\n                <authentication>\n                  <users>\n                    <user>\n                      <name>erv</name>\n                      <uid>9000</uid>\n                      <gid>100</gid>\n                      <password>$0$ggsn</password>\n                      <ssh_keydir>/var/confd/homes/erv/.ssh</ssh_keydir>\n                      <homedir>/var/confd/homes/erv</homedir>\n                    </user>\n                  </users>\n                </authentication>\n              </aaa>\n            </config>",
+      "day0.configuration.secrets": {
+        "secret1": {
+          "key3": "value3",
+          "key4": "value4"
+        },
+        "secret2": {
+          "key5": "value5",
+          "key6": "value6"
+        }
+      },
+      "day0.configuration.secretname": "day0-secret",
+      "day0.configuration.param1.key": "key1",
+      "day0.configuration.param1.value": "value1",
+      "day0.configuration.param2.key": "key2",
+      "day0.configuration.param2.value": "value2",
+      "listType": "[\"test1\",\"test2\"]",
+      "mapType": "{\"key1\":\"value1\",\"key2\":\"value2\"}",
+      "bro.ingress.enabled": false,
+      "backup-controller.enabled": false,
+      "retrieveUnsealKey": false
+    }
+  },
+  "upgrade": {
+    "applicationTimeOut": "600",
+    "additionalAttributesFile": "src/main/resources/upgrade-values.yaml",
+    "additionalAttributes": {
+      "tags.all": false,
+      "tags.pm": true,
+      "eric-adp-gs-testapp.ingress.enabled": false,
+      "eric-pm-server.server.ingress.enabled": false,
+      "influxdb.ext.apiAccessHostname": "influxdb-service2-upgrade",
+      "eric-pm-server.server.persistentVolume.storageClass": "network-block",
+      "pm-testapp.ingress.domain": "server-upgrade",
+      "config.nbi.file.enabled": true,
+      "config.nbi.file.json.configMap": "{\"ipconfig-upgrade\": \"192.168.1.10\/16\",\n\"params-upgrade\": {\"test-upgrade\": \"config-upgrade\"},\n\"array-upgrade\": [{\"traceNumber-upgrade-1\": 89},{\"traceNumber-upgrade-2\": \"otherkey\"}]}",
+      "config.nbi.file.script.configMap": "#! /bin/sh\n\necho -n \"Enter Filename-> \"\nread filename\nif [ -f \"$filename\" ]; then\nsort $filename | uniq | tee sorted.txt\nelse\necho \"No $filename in $pwd...try again\"\nfi\necho -e \"\\n$(date \"+%d-%m-%Y --- %T\") --- Starting work\\n\"\n\napt-get update\napt-get -y upgrade\n\napt-get -y autoremove\napt-get autoclean\n\necho -e \"\\n$(date \"+%T\") \\t Script Terminated\n\nROOT_UID=0\n\nif [ \"$UID\" -eq \"$ROOT_UID\" ]\nthen\necho \"You are root.\"\nelse\necho \"You are not root\"\nfi\nexit 0",
+      "config.nbi.file.xml.configMap": "<?xml version=\"1.0\"?>\n<catalog>\n   <book id=\"bk101\">\n      <author>Gambardella, Matthew</author>\n      <title>XML Developer's Guide</title>\n      <genre>Computer</genre>\n      <price>44.95</price>\n      <publish_date>2000-10-01</publish_date>\n      <description>An in-depth look at creating applications \n      with XML.</description>\n   </book>\n   <book id=\"bk102\">\n      <author>Ralls, Kim</author>\n      <title>Midnight Rain</title>\n      <genre>Fantasy</genre>\n      <price>5.95</price>\n      <publish_date>2000-12-16</publish_date>\n      <description>A former architect battles corporate zombies, \n      an evil sorceress, and her own childhood to become queen \n      of the world.</description>\n   </book>\n   <book id=\"bk103\">\n      <author>Corets, Eva</author>\n      <title>Maeve Ascendant</title>\n      <genre>Fantasy</genre>\n      <price>5.95</price>\n      <publish_date>2000-11-17</publish_date>\n      <description>After the collapse of a nanotechnology \n      society in England, the young survivors lay the \n      foundation for a new society.</description>\n   </book>\n   <book id=\"bk104\">\n      <author>Corets, Eva</author>\n      <title>Oberon's Legacy</title>\n      <genre>Fantasy</genre>\n      <price>5.95</price>\n      <publish_date>2001-03-10</publish_date>\n      <description>In post-apocalypse England, the mysterious \n      agent known only as Oberon helps to create a new life \n      for the inhabitants of London. Sequel to Maeve \n      Ascendant.</description>\n   </book>\n</catalog>",
+      "eric-adp-gs-testapp.service.replicaCount": 1,
+      "listType": "[\"test1\",\"test2\"]",
+      "mapType": "{\"key1\":\"value 1 updated\",\"key2\":\"value 2 updated\"}",
+      "bro.ingress.enabled": false,
+      "backup-controller.enabled": false,
+      "upgrade.downsize.allowed": false
+    },
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running"
+  },
+  "scale": {
+    "applicationTimeOut": "600",
+    "aspectId": "Aspect1",
+    "deployments": {
+      "eric-pm-bulk-reporter": "2"
+    },
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running"
+  },
+  "rollback": {
+    "applicationTimeOut": "600",
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running"
+  },
+  "terminate": {
+    "terminationType": "GRACEFUL",
+    "applicationTimeOut": "600",
+    "expectedOperationState": "Completed"
+  },
+  "customresource": {
+    "customResourceInfoList": [
+      {
+        "crdYamlPath": "src/main/resources/crd/vnfinstanceresponses-crd.yaml",
+        "crMetadata": {
+          "name": "vir.phase1.evnfm.test.e2e.bur"
+        }
+      }
+    ]
+  }
+}

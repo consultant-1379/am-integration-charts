@@ -1,0 +1,59 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2024
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<suite name="E-VNFM Release TestNg Suite" verbose="10" configfailurepolicy="continue" preserve-order="true">
+
+    <listeners>
+        <listener class-name="com.ericsson.eo.evnfm.acceptance.testng.listeners.EvnfmTestNGListener"/>
+    </listeners>
+
+    <parameter name="testTargetClusterData" value="etsi-tosca-rel4/cismCluster/testTargetCluster.yaml"/>
+    <parameter name="basicOnboardingData" value="etsi-tosca-rel4/onboarding.yaml"/>
+    <parameter name="basicLCMData" value="etsi-tosca-rel4/basicLCM.yaml"/>
+    <parameter name="cnfHealData" value="etsi-tosca-rel4/heal/healRest.yaml"/>
+
+    <test name="Set up" parallel="none">
+        <classes>
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.cismcluster.BasicClusterTest">
+                <methods>
+                    <include name="testRegisterCluster"/>
+                </methods>
+            </class>
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.BasicOnboardingTest">
+                <methods>
+                    <include name="testLicensesAvailable"/>
+                    <include name="testOnboardCsarREST"/>
+                    <include name="testVnfdZipOnboardedCorrectly"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Rel 4 End to End Acceptance Tests" parallel="classes" thread-count="THREAD_COUNT">
+        <classes>
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.lcm.BasicLCMTest"/><!--7 minutes-->
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.lcm.backuprestore.BackupRestoreOperationRestTest"/><!--7 minutes-->
+        </classes>
+    </test>
+    <test name="Clean up" parallel="none">
+        <classes>
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.BasicOnboardingTest">
+                <methods>
+                    <include name="testDeletePackageREST"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

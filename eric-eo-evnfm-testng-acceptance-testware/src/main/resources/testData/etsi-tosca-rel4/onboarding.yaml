@@ -1,0 +1,45 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+packages:
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/single/spider-app-b-etsi-tosca-rel4/spider-app-b-etsi-tosca-rel4/1.0.32/spider-app-b-etsi-tosca-rel4-1.0.32.csar"
+    vnfdId: "single-chart-527c-arel4-5fcb086597zs"
+    vnfdFile: "spider-app-b-etsi-tosca-rel4.yaml"
+    skipImageUpload: false
+    timeOut: 10
+    packageSecurityOption: UNSIGNED
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/single/spider-app-c-etsi-tosca-rel4/spider-app-c-etsi-tosca-rel4/1.0.34/spider-app-c-etsi-tosca-rel4-1.0.34.csar"
+    vnfdId: "single-chart-c-rel4-545379754e30"
+    vnfdFile: "spider-app-c-etsi-tosca-rel4.yaml"
+    skipImageUpload: false
+    timeOut: 10
+    packageSecurityOption: UNSIGNED
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/a/spider-app-multi-a-etsi-tosca-rel4/spider-app-multi-a-etsi-tosca-rel4/1.0.26/spider-app-multi-a-etsi-tosca-rel4-1.0.26.csar"
+    vnfdId: "multi-chart-etsi-rel4-5fcb086597"
+    vnfdFile: "spider-app-multi-a-etsi-tosca-rel4.yaml"
+    skipImageUpload: false
+    timeOut: 10
+    packageSecurityOption: UNSIGNED
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_3/SOL_4_2_1/multi/b/spider-app-multi-b-etsi-tosca-rel4/spider-app-multi-b-etsi-tosca-rel4/1.0.28/spider-app-multi-b-etsi-tosca-rel4-1.0.28.csar"
+    vnfdId: "multi-chart-etsi-rel4-b-455379754e37"
+    vnfdFile: "spider-app-multi-b-etsi-tosca-rel4.yaml"
+    skipImageUpload: false
+    timeOut: 10
+    packageSecurityOption: UNSIGNED
+
+clusterConfig:
+  localPath: "${KUBE_CONFIG_PATH:-hahn062.config}"
+  description: "Valid cluster config pointing to external cluster"

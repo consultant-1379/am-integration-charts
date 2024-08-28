@@ -1,0 +1,11 @@
+{
+  "general": {
+    "apiGatewayHost": "https://evnfm.release-env-evnfm.hahn062.rnd.gic.ericsson.se",
+    "idamHost": "https://keycloak.release-env-evnfm.hahn062.rnd.gic.ericsson.se",
+    "idamAdminUsername": "admin",
+    "idamAdminPassword": "Ericsson123!",
+    "idamRealm": "master",
+    "idamClient": "eo",
+    "idamClientSecret": "6d19ab9b-9020-4210-ab4d-52847b5c9f31"
+  }
+}

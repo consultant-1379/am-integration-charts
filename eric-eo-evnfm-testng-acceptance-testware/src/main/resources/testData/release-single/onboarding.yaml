@@ -1,0 +1,33 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+packages:
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/single/spider-app-b/spider-app-b/1.0.28/spider-app-b-1.0.28-imageless.csar"
+    vnfdId: "36ff67a9-0de4-48f9-97a3-4b0661670934"
+    vnfdFile: "spider-app-b.yaml"
+    skipImageUpload: true
+    timeOut: 10
+    packageSecurityOption: UNSIGNED
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/single/spider-app-c/spider-app-c/1.0.29/spider-app-c-1.0.29-imageless.csar"
+    vnfdId: "2ce9484e-85e5-49b7-ac97-445379754e37"
+    vnfdFile: "spider-app-c.yaml"
+    skipImageUpload: true
+    timeOut: 10
+    packageSecurityOption: UNSIGNED
+
+clusterConfig:
+  localPath: "${KUBE_CONFIG_PATH:-hahn062.config}"
+  description: "Valid cluster config pointing to external cluster"

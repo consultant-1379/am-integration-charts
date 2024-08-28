@@ -1,0 +1,5 @@
+global: {{ .Values | get "global" | toYaml | nindent 2 }}
+
+{{ if hasKey .Values .Release.Name -}}
+  {{ .Values | get .Release.Name | toYaml }}
+{{ end -}}

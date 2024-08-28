@@ -1,0 +1,262 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+# Default values for eric-eo-evnfm.
+# Information on why these values are required are contained within the README.md file.
+global:
+  hosts:
+    vnfm:
+    iam:
+  timezone: UTC
+  networkPolicy:
+    enabled: true
+  postgresCredentials:
+    secret: eric-sec-access-mgmt-creds
+  registry:
+    url: armdocker.rnd.ericsson.se
+  iam:
+    adminSecret: eric-sec-access-mgmt-creds
+  support:
+    ipv6:
+      enabled: false
+  security:
+    tls:
+      enabled: false
+    privilegedPolicyClusterRoleName: RELEASE-NAME-allowed-use-privileged-policy
+  logShipper:
+    deployment:
+      type: "sidecar"
+  labels: {}
+  annotations: {}
+  nodeSelector: {}
+  db:
+    connection:
+      max-lifetime:
+  securityPolicy:
+    rolekind: "" # possible values: "ClusterRole", "Role", ""
+
+imageCredentials:
+  keycloakClient:
+    registry:
+      url:
+      imagePullPolicy: IfNotPresent
+    repoPath: # see default value in eric-product-info.yaml file
+
+eric-am-common-wfs-ui:
+  ingress:
+    enabled: false
+
+eric-am-common-wfs:
+  ingress:
+    host:
+    enabled: false
+  autoConfigureHelm:
+    enabled: true
+  autoConfigureDocker:
+    enabled: true
+  broAgentFileMount:
+    enabled: true
+
+eric-lcm-container-registry:
+  enabled: true
+  ingress:
+    enabled: true
+    tls:
+      secretName: registry-tls-secret
+    useHttpProxy: false
+    ingressClass: "nginx"
+  podDisruptionBudget:
+    minAvailable : 50%
+  daemonSet:
+    enabled: true
+  registry:
+    metrics:
+      enabled: true
+    users:
+      secret: container-registry-users-secret
+    storage:
+      cache:
+        enabled: false
+  brAgent:
+    enabled: true
+    security:
+      tls:
+        enabled: false
+    backupTypeList:
+      - "DEFAULT"
+    restore:
+      s3:
+        numberOfThreads: 10
+        chunkSizeInMi: 100
+  log:
+    schema: "adp"
+  persistence:
+    persistentVolumeClaim:
+      size: 450Gi
+  resources:
+    registry:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "400Mi"
+    sidecar:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "400Mi"
+    migration:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "350Mi"
+    init:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "350Mi"
+    logshipper:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "350Mi"
+    brAgent:
+      limits:
+        memory: "4096Mi"
+      requests:
+        memory: "512Mi"
+
+eric-lcm-helm-chart-registry:
+  enabled: true
+  env:
+    open:
+      DISABLE_METRICS: false
+      AUTH_ANONYMOUS_GET: true      #Temporary change until SM-66445 is done
+  ingress:
+    enabled: false
+    tls:
+      secretName: helm-registry-tls-secret
+    useHttpProxy: false
+    ingressClass: "nginx"
+  updateStrategy:
+    type: Recreate
+  brAgent:
+    enabled: true
+    backupTypeList:
+      - "GR"
+      - "DEFAULT"
+    security:
+      tls:
+        enabled: false
+  log:
+    schema: "adp"
+  resources:
+    registry:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "400Mi"
+    sidecar:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "400Mi"
+    migration:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "350Mi"
+    init:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "350Mi"
+    logshipper:
+      requests:
+        ephemeral-storage: "300Mi"
+      limits:
+        ephemeral-storage: "350Mi"
+
+eric-vnfm-orchestrator-service:
+  ingress:
+    enabled: false
+    host:
+
+application-manager-postgres:
+  brAgent:
+    enabled: true
+    backupTypeList:
+      - "GR"
+    log:
+      outputs:
+        - tcp
+        - console
+      labels:
+        logger-communication-type: direct
+  credentials:
+    kubernetesSecretName: eric-sec-access-mgmt-creds
+    keyForUserId: pguserid
+    keyForUserPw: pgpasswd
+    keyForSuperPw: pgpasswd
+    keyForReplicaId: pguserid
+    keyForReplicaPw: pgpasswd
+    keyForMetricsPw: pgpasswd
+  patroni:
+    logLevel: WARN
+  log:
+    outputs:
+      - stream
+      - stdout
+  labels:
+    logger-communication-type: direct
+  logshipper:
+    logplane: "eo"
+  persistentVolumeClaim:
+    housekeeping_threshold: 90
+    size: "8Gi"
+  resources:
+    postgres:
+      requests:
+        ephemeral-storage: "10Gi"
+      limits:
+        ephemeral-storage: "12Gi"
+    metrics:
+      requests:
+        ephemeral-storage: "230Mi"
+      limits:
+        ephemeral-storage: "300Mi"
+    kube_client:
+      requests:
+        ephemeral-storage: "230Mi"
+      limits:
+        ephemeral-storage: "300Mi"
+    brm:
+      requests:
+        ephemeral-storage: "230Mi"
+      limits:
+        ephemeral-storage: "300Mi"
+  bandwidth:
+    postgres:
+      maxEgressRate: "400M"
+  postgresConfig:
+    max_connections: 240
+    idle_in_transaction_session_timeout: 90000
+    tcp_keepalives_idle: 60
+    tcp_keepalives_interval: 10
+    tcp_keepalives_count: 10
+
+labels: {}
+annotations: {}
+nodeSelector: {}

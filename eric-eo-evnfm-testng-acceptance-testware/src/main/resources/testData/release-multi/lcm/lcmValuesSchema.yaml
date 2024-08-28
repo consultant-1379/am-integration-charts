@@ -1,0 +1,39 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "8eca7b35-72d8-4cab-9fee-138f1c3b9cccc"
+    vnfInstanceName: lcm-values-schema-positive
+    vnfInstanceDescription: Example description
+    namespace: lcm-values-schema-positive-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    applicationTimeout: 600
+    skipVerification: false
+    additionalParams:
+      probesConfig.readinessProbe.delayBeforeReady: 15
+  - vnfdId: "8eca7b35-72d8-4cab-9fee-138f1c3b9cccc"
+    vnfInstanceName: lcm-values-schema-negative
+    vnfInstanceDescription: Example description
+    namespace: lcm-values-schema-negative-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: FAILED
+    applicationTimeout: 600
+    skipVerification: false
+    additionalParams:
+      keyMissingInValuesSchema: someValue
+      probesConfig.readinessProbe.delayBeforeReady: 15

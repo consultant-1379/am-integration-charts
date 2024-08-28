@@ -1,0 +1,280 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a271"
+    vnfInstanceName: upgrade-pattern-multi
+    vnfInstanceDescription: Example description
+    namespace: upgrade-pattern-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+      retrieveUnsealKey: false
+      upgrade-rollback.param1: instantiate
+    scaleInfo: {}
+    valuesFilePart:
+      upgrade-rollback:
+        param3:
+          key1: value1
+          key2: value2
+    expectedHelmValues:
+      upgrade-rollback:
+        param1: instantiate
+        param3:
+          key1: value1
+          key2: value2
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a252"
+    vnfInstanceName: upgrade-by-software-version-multi
+    vnfInstanceDescription: Example description
+    namespace: upgrade-by-software-version-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+      eric-pm-server.server.persistentVolume.storageClass: network-block
+      retrieveUnsealKey: false
+      upgrade-rollback.param1: instantiate
+    scaleInfo: {}
+    valuesFilePart:
+      upgrade-rollback:
+        param3:
+          key1: value1
+          key2: value2
+    expectedHelmValues:
+      upgrade-rollback:
+        param1: instantiate
+        param3:
+          key1: value1
+          key2: value2
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+
+
+cnfToUpgrade:
+  - vnfdId: "multi-chart-etsi-rel4-b-455379754d26"
+    vnfInstanceName: upgrade-pattern-multi
+    vnfInstanceDescription: Example description
+    namespace: upgrade-pattern-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+    scaleInfo: {}
+    extensions:
+      vnfControlledScaling:
+        Aspect4: ManualControlled
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+        - revision: "2"
+          description: Upgrade complete
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+  - vnfdId: "multi-chart-569d-xyz3-5g15f7h257"
+    vnfInstanceName: upgrade-by-software-version-multi
+    vnfInstanceDescription: Example description
+    namespace: upgrade-by-software-version-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+      eric-pm-server.server.persistentVolume.storageClass: network-block
+    scaleInfo: {}
+    extensions:
+      vnfControlledScaling:
+        Aspect4: ManualControlled
+        Aspect1: ManualControlled
+        Aspect2: ManualControlled
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+        - revision: "2"
+          description: Upgrade complete
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+
+
+cnfToRollback:
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a271"
+    vnfInstanceName: upgrade-pattern-multi
+    vnfInstanceDescription: Example description
+    namespace: upgrade-pattern-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+      eric-pm-server.server.persistentVolume.storageClass: network-block
+      retrieveUnsealKey: false
+    scaleInfo: {}
+    expectedHelmValues:
+      upgrade-rollback:
+        param1: instantiate
+        param3:
+          key1: value1
+          key2: value2
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+        - revision: "2"
+          description: Upgrade complete
+        - revision: "3"
+          description: Rollback to 1
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1
+  - vnfdId: "multi-chart-477c-aab3-2b04e6a252"
+    vnfInstanceName: upgrade-by-software-version-multi
+    vnfInstanceDescription: Example description
+    namespace: upgrade-by-software-version-multi-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      data_conversion_identifier: rollback-operation-from-rel4-b-to-legacy-a
+      influxdb.ext.apiAccessHostname: influxdb-service2.rontgen010.seli.gic.ericsson.se
+      config.nbi.file.enabled: false
+      eric-adp-gs-testapp.ingress.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      pm-testapp.ingress.domain: rontgen010.seli.gic.ericsson.se
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-adp-gs-testapp.tls.dced.enabled: false
+      bro.ingress.enabled: false
+      eric-pm-server.enabled: false
+      eric-pm-server.server.persistentVolume.storageClass: network-block
+      retrieveUnsealKey: false
+    scaleInfo: {}
+    expectedHelmValues:
+      upgrade-rollback:
+        param1: instantiate
+        param3:
+          key1: value1
+          key2: value2
+    expectedHelmHistory:
+      test-scale-chart:
+        - revision: "1"
+          description: Install complete
+        - revision: "2"
+          description: Upgrade complete
+        - revision: "3"
+          description: Rollback to 1
+      spider-app:
+        - revision: "1"
+          description: Install complete
+    targets:
+      <vnfInstanceName>-vnfc2: 1

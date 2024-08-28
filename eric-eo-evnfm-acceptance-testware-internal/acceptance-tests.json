@@ -1,0 +1,11 @@
+{
+  "general": {
+    "apiGatewayHost": "https://vnfm.release-evnfm-63.hahn061.rnd.gic.ericsson.se",
+    "idamHost": "https://iam.release-evnfm-63.hahn061.rnd.gic.ericsson.se",
+    "idamAdminUsername": "admin",
+    "idamAdminPassword": "bKiA1I0KKv1Ji9JiMIz6!#",
+    "idamRealm": "master",
+    "idamClient": "eo",
+    "idamClientSecret": "Fatg6[DebdGona"
+  }
+}

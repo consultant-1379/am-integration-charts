@@ -1,0 +1,110 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  - vnfdId: "multi-chart-etsi-rel4-5fcb086597"
+    vnfInstanceName: target-scale-level-one-aspect
+    vnfInstanceDescription: instantiate with only one of Scale Aspect id is set in the targetScaleLevelInfo
+    namespace: target-scale-level-info-one-aspect-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-pm-server.enabled: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    targetScaleLevelInfo:
+      - aspectId: VNF-3GPP_5G-UE-AUTH^
+        scaleLevel: 1
+    scaleInfo:
+      VNF-3GPP_5G-UE-AUTH^: 1
+      50CE_NT-AU_PONT%: 0
+      UA-VNF-14PP#: 0
+      I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: 0
+  - vnfdId: "multi-chart-etsi-rel4-5fcb086597"
+    vnfInstanceName: target-scale-info-all-aspects
+    vnfInstanceDescription: instantiate with ALL Scale Aspect ids are set in the targetScaleLevelInfo
+    namespace: target-scale-level-info-all-aspects-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-pm-server.enabled: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    targetScaleLevelInfo:
+      - aspectId: VNF-3GPP_5G-UE-AUTH^
+        scaleLevel: 1
+      - aspectId: 50CE_NT-AU_PONT%
+        scaleLevel: 2
+      - aspectId: UA-VNF-14PP#
+        scaleLevel: 1
+      - aspectId: I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*
+        scaleLevel: 2
+    scaleInfo:
+      VNF-3GPP_5G-UE-AUTH^: 1
+      50CE_NT-AU_PONT%: 2
+      UA-VNF-14PP#: 1
+      I_WANT_THIS_SCALE_ASPECT_TO_BE_REALLY_LONG_TO_TEST_WHAT_WILL_BE_HAPPENING_DURING_PARSING_VNFD_PARAMETERS*: 2
+  - vnfdId: "multi-chart-etsi-rel4-b-455379754e37-mixed_vdu"
+    vnfInstanceName: target-scale-info-no-instantiation-level
+    vnfInstanceDescription: instantiate with ALL Scale Aspect ids are set in the targetScaleLevelInfo and no instantiation level
+    namespace: target-scale-level-info-no-instantiation-level-ns
+    cluster:
+      localPath: "${KUBE_CONFIG_PATH}"
+    expectedOperationState: Completed
+    expectedComponentsState: Running
+    cleanUpResources: true
+    skipVerification: false
+    additionalParams:
+      influxdb-service.enabled: false
+      eric-pm-bulk-reporter.enabled: false
+      eric-adp-gs-testapp.enabled: false
+      config.nbi.file.enabled: false
+      tags.pm: true
+      backup-controller.enabled: false
+      global.hosts.bro: bro.test.hahn061.rnd.gic.ericsson.se
+      tags.all: false
+      eric-pm-server.enabled: false
+      bro.ingress.enabled: false
+      retrieveUnsealKey: false
+    targetScaleLevelInfo:
+      - aspectId: Aspect1
+        scaleLevel: 2
+    scaleInfo:
+      Aspect1: 2

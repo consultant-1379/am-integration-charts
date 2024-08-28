@@ -1,0 +1,50 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+eric-pm-server:
+  enabled: false
+
+logging:
+  enabled: false
+
+eric-eo-evnfm:
+  application-manager-postgres:
+    persistence:
+      backup:
+        enabled: false
+    brAgent:
+      enabled: false
+    metrics:
+      enabled: false
+  eric-lcm-helm-chart-registry:
+    brAgent:
+      enabled: false
+  eric-lcm-container-registry:
+    brAgent:
+      enabled: false
+  eric-am-common-wfs:
+    broAgentFileMount:
+      enabled: false
+idam-database-pg:
+  brAgent:
+    enabled: false
+  metrics:
+    enabled: false
+eric-eo-eai-database-pg:
+  brAgent:
+    enabled: false
+backup-controller:
+  enabled: false

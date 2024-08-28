@@ -1,0 +1,71 @@
+{
+  "general": {
+    "vnfmUsername": "vnfm",
+    "vnfmPassword": "Ericsson123!",
+    "pageLoadTimeout": 10,
+    "apiGatewayHost": "http://localhost:8080",
+    "idamHost": "https://keycloak.release-env-eric-evnfm.hahn062.rnd.gic.ericsson.se",
+    "idamAdminUsername": "admin",
+    "idamAdminPassword": "Ericsson123!",
+    "idamRealm": "master",
+    "idamClient": "eo",
+    "idamClientSecret": "6d19ab9b-9020-4210-ab4d-52847b5c9f31"
+  },
+  "onboarding": {
+    "csarDownloadPath": "/home/amadm100/release-testing-csars",
+    "packages": [
+      {
+        "packageName": "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/tosca_1_2/SOL_2_5_1/multi/a/spider-app-multi-a-v2/spider-app-multi-a-v2/1.0.24/spider-app-multi-a-v2-1.0.24-imageless.csar",
+        "vnfdId": "multi-chart-477c-aab3-2b04e6a383",
+        "operation": "instantiate",
+        "isContainerVerification": false,
+        "testType": "rest"
+      }
+    ]
+  },
+  "cluster": {
+    "externalConfigFile": "external_admin.config"
+  },
+  "instantiate": {
+    "cluster": "external_admin",
+    "namespace": "release-test-vnf",
+    "releaseName": "release-test-vnf",
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running",
+    "additionalAttributes": {
+      "tags.all": false,
+      "tags.pm": true,
+      "eric-adp-gs-testapp.ingress.enabled": false,
+      "eric-pm-server.server.ingress.enabled": false,
+      "influxdb.ext.apiAccessHostname": "influxdb-service2",
+      "pm-testapp.ingress.domain": "server",
+      "retrieveUnsealKey": "false"
+    }
+  },
+  "upgrade": {
+    "additionalAttributes": {
+      "tags.all": false,
+      "tags.pm": true,
+      "eric-adp-gs-testapp.ingress.enabled": false,
+      "eric-pm-server.server.ingress.enabled": false,
+      "influxdb.ext.apiAccessHostname": "influxdb-service2",
+      "pm-testapp.ingress.domain": "server",
+      "upgrade.downsize.allowed": false,
+      "values.yaml": "{\"eric-pm-server\":{\"server\":{\"persistentVolume\":{\"storageClass\": \"network-block\"}}}}"
+    },
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running"
+  },
+  "scale": {
+    "aspectId": "Aspect1",
+    "deployments": {
+      "eric-pm-bulk-reporter": "2"
+    },
+    "expectedOperationState": "Completed",
+    "expectedComponentsState": "Running"
+  },
+  "terminate": {
+    "terminationType": "FORCEFUL",
+    "expectedOperationState": "Completed"
+  }
+}

@@ -1,0 +1,780 @@
+{
+  "credentials": [
+    {
+      "username": "evnfmSuperUser",
+      "password": "Ericsson123!",
+      "role": "E-VNFM Super User Role"
+    },
+    {
+      "username": "evnfmReadOnlyUser",
+      "password": "Ericsson123!",
+      "role": "E-VNFM Read-only User Role"
+    },
+    {
+      "username": "evnfmUser",
+      "password": "Ericsson123!",
+      "role": "E-VNFM User Role"
+    },
+    {
+      "username": "evnfmUIUser",
+      "password": "Ericsson123!",
+      "role": "E-VNFM UI User Role"
+    },
+    {
+      "username": "evnfmCIUser",
+      "password": "Ericsson123!",
+      "role": "E-VNFM ADP CI Flow Role"
+    },
+    {
+      "username": "evnfmOnboardingUser",
+      "password": "Ericsson123!",
+      "role": "E-VNFM Onboarding User Role"
+    },
+    {
+      "username": "nonEvnfmUser",
+      "password": "Ericsson123!",
+      "role": ""
+    }
+  ],
+  "useCases": [
+    {
+      "name": "packageOnboard",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmOnboardingUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnfm/onboarding/api/vnfpkgm/v1/vnf_packages",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/vnfpkgm/v1/vnf_packages/{vnfPkgId}/package_content",
+          "methods": [
+            "PUT"
+          ],
+          "placeholders": [
+            "{vnfPkgId}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/packages",
+          "methods": [
+            "POST"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CISMConfigManage",
+      "allowedUsers": [
+        "evnfmSuperUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/clusterconfigs",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/clusterconfigs/{clusterFile}",
+          "methods": [
+            "DELETE"
+          ],
+          "placeholders": [
+            "{clusterFile}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/clusterconfigs/{clusterFile}",
+          "methods": [
+            "PUT"
+          ],
+          "placeholders": [
+            "{clusterFile}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/clusterconfigs/{clusterFile}",
+          "methods": [
+            "PATCH"
+          ],
+          "placeholders": [
+            "{clusterFile}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CISMConfigView",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser",
+        "evnfmReadOnlyUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/clusterconfigs",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "packageDelete",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmOnboardingUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnfm/onboarding/api/vnfpkgm/v1/vnf_packages/{vnfPkgId}",
+          "methods": [
+            "DELETE"
+          ],
+          "placeholders": [
+            "{vnfPkgId}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/packages/{id}",
+          "methods": [
+            "DELETE"
+          ],
+          "placeholders": [
+            "{id}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "packageView",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser",
+        "evnfmReadOnlyUser",
+        "evnfmOnboardingUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnfm/onboarding/api/vnfpkgm/v1/vnf_packages",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/vnfpkgm/v1/vnf_packages/{vnfPkgId}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{vnfPkgId}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/vnfpkgm/v1/vnf_packages/{appPkgId}/vnfd",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{appPkgId}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/packages",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/packages/{id}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{id}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/packages/{id}/status",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{id}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/packages/filter/autocomplete",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "instantiate",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/instantiate",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "terminate",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}",
+          "methods": [
+            "DELETE"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/terminate",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "upgrade",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/change_package_info",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/change_vnfpkg",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "heal",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/heal",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "createBackup",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/backups",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "backupScopes",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser",
+        "evnfmReadOnlyUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/scopes",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "listBackup",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser",
+        "evnfmReadOnlyUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/backups",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "deleteBackup",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/backups/{scope}/{backupName}",
+          "methods": [
+            "DELETE"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}",
+            "{scope}",
+            "{backupName}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "manualScale",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/scale",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sync",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/sync",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "viewCNF",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser",
+        "evnfmReadOnlyUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/vnf_lcm_op_occs",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/vnf_lcm_op_occs/{vnfLcmOpOccId}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{vnfLcmOpOccId}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/operations",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/resources",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/resources/{resourceId}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{resourceId}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/resources/{resourceId}/pods",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{resourceId}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/api/v1/instance/filter/autocomplete",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "enmRegistration",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/addNode",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        },
+        {
+          "uri": "/vnflcm/v1/vnf_instances/{vnfInstanceId}/deleteNode",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfInstanceId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vimRegistration",
+      "allowedUsers": [
+        "evnfmSuperUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnfm/wfs/api/lcm/v2/cluster",
+          "methods": [
+            "POST"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "usermgmtView",
+      "allowedUsers": [
+        "evnfmSuperUser"
+      ],
+      "uris": [
+        {
+          "uri": "/idm/rolemgmt/v1/roles",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/idm/usermgmt/v1/users",
+          "methods": [
+            "GET"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "usermgmtCreate",
+      "allowedUsers": [
+        "evnfmSuperUser"
+      ],
+      "uris": [
+        {
+          "uri": "/idm/usermgmt/v1/users",
+          "methods": [
+            "POST"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "usermgmtModify",
+      "allowedUsers": [
+        "evnfmSuperUser"
+      ],
+      "uris": [
+        {
+          "uri": "/idm/usermgmt/v1/users/{username}",
+          "methods": [
+            "PUT"
+          ],
+          "placeholders": [
+            "{username}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "usermgmtDelete",
+      "allowedUsers": [
+        "evnfmSuperUser"
+      ],
+      "uris": [
+        {
+          "uri": "/idm/usermgmt/v1/users/{username}",
+          "methods": [
+            "DELETE"
+          ],
+          "placeholders": [
+            "{username}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "uriOnboard",
+      "allowedUsers": [
+        "evnfmCIUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnfm/onboarding/api/v1/internal/packages",
+          "methods": [
+            "POST"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "miscView",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser",
+        "evnfmReadOnlyUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnfm/onboarding/api/v1/charts",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/charts/{chartName}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{chartName}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/images",
+          "methods": [
+            "GET"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/images/{imageName}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{imageName}"
+          ]
+        },
+        {
+          "uri": "/vnfm/onboarding/api/v1/images/{imageName}/{imageTag}",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{imageName}",
+            "{imageTag}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "privateEndpoints",
+      "allowedUsers": [],
+      "uris": [
+        {
+          "uri": "/vnfm/onboarding/api/vnfpkgm/v1/vnf_packages/{appPkgId}/update_usage_state",
+          "methods": [
+            "PUT"
+          ],
+          "placeholders": [
+            "{appPkgId}"
+          ]
+        },
+        {
+          "uri": "/api/internal/{releaseName}/pods",
+          "methods": [
+            "GET"
+          ],
+          "placeholders": [
+            "{releaseName}"
+          ]
+        },
+        {
+          "uri": "/api/lcm/v2/resources",
+          "methods": [
+            "POST"
+          ]
+        },
+        {
+          "uri": "/api/lcm/v2/resources/{releaseName}",
+          "methods": [
+            "DELETE",
+            "GET"
+          ],
+          "placeholders": [
+            "{releaseName}"
+          ]
+        },
+        {
+          "uri": "/api/lcm/v2/resources/{releaseName}/upgrade",
+          "methods": [
+            "PUT"
+          ],
+          "placeholders": [
+            "{releaseName}"
+          ]
+        },
+        {
+          "uri": "/api/lcm/v2/resources/{releaseName}/rollback",
+          "methods": [
+            "PUT"
+          ],
+          "placeholders": [
+            "{releaseName}"
+          ]
+        },
+        {
+          "uri": "/api/lcm/v2/resources/{releaseName}/scale",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{releaseName}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "rollbackOperation",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_lcm_op_occs/{vnfLcmOpOccId}/rollback",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfLcmOpOccId}"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "failOperation",
+      "allowedUsers": [
+        "evnfmSuperUser",
+        "evnfmUser"
+      ],
+      "uris": [
+        {
+          "uri": "/vnflcm/v1/vnf_lcm_op_occs/{vnfLcmOpOccId}/fail",
+          "methods": [
+            "POST"
+          ],
+          "placeholders": [
+            "{vnfLcmOpOccId}"
+          ]
+        }
+      ]
+    }
+  ]
+}

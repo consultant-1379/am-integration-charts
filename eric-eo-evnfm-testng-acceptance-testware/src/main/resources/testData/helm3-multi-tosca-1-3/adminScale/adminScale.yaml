@@ -1,0 +1,190 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  vnfdId: "multi-chart-477c-aab3-2b04e6a363"
+  packageName: Ericsson.spider-app-multi-a-tosca.1.0.29s.1.0.29
+  vnfInstanceName: admin-scale-ui
+  vnfInstanceDescription: Example description
+  namespace: admin-scale-ui-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 600
+  instantiationLevel: instantiation_level_2
+  extensions:
+    Aspect1: CISMControlled
+    Aspect2: ManualControlled
+    Aspect3: ManualControlled
+    Aspect5: CISMControlled
+  cleanUpResources: false
+  skipVerification: false
+  configDay0:
+    secrets:
+      - name: restore-external-storage-secret
+        data:
+          restore.externalStorageURI: external-storage-url
+          restore.externalStorageCredentials: external-storage-credentials
+      - name: secret1
+        data:
+          key3: value3
+          key4: value4
+      - name: secret2
+        data:
+          key5: value5
+          key6: value6
+  additionalParams:
+    eric-pm-server.server.persistentVolume.storageClass: network-block
+    day0.configuration.secretname: restore-external-storage-secret
+    day0.configuration.param1.key: restore.externalStorageURI
+    day0.configuration.param1.value: external-storage-url
+    day0.configuration.param2.key: restore.externalStorageCredentials
+    day0.configuration.param2.value: external-storage-credentials
+    day0.configuration.secrets:
+      secret1:
+        key3: value3
+        key4: value4
+      secret2:
+        key5: value5
+        key6: value6
+  targets: # Targets should not be part of EvnfmCnf Model, this is not a parameter, this is a result (SM-98579)
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 1
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-vnfc5: 2
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 1
+    eric-pm-server: 1
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    Aspect1: 0
+    Aspect2: 0
+    Aspect3: 0
+    Aspect5: 1
+
+cnfToScale:
+  vnfInstanceName: admin-scale-ui
+  namespace: admin-scale-ui-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  packageName: Ericsson.spider-app-multi-a-tosca.1.0.29s.1.0.29
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 600
+  aspectToScale: Aspect1
+  stepsToScale: 1
+  extensions:
+    Aspect1: CISMControlled
+    Aspect2: ManualControlled
+    Aspect3: ManualControlled
+    Aspect5: CISMControlled
+  cleanUpResources: false
+  skipVerification: false
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 1
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-vnfc5: 2
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-server: 1
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    Aspect1: 1
+    Aspect2: 0
+    Aspect3: 0
+    Aspect5: 1
+
+cnfToUpgrade:
+  vnfdId: "multi-chart-569d-xyz3-5g15f7h500"
+  packageName: Ericsson.spider-app-multi-b-tosca.1.0.29s.1.0.29
+  vnfInstanceName: admin-scale-ui
+  namespace: admin-scale-ui-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  vnfInstanceDescription: Example description
+  applicationTimeout: 600
+  expectedOperationState: Completed
+  cleanUpResources: false
+  skipVerification: false
+  additionalParams:
+    eric-pm-server.server.persistentVolume.storageClass: network-block
+  extensions:
+    Aspect1: CISMControlled
+    Aspect2: ManualControlled
+    Aspect4: ManualControlled
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 5
+    <vnfInstanceName>-vnfc3: 5
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-server: 1
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    Aspect1: 1
+    Aspect2: 1
+    Aspect4: 0
+
+cnfToRollback:
+  vnfInstanceName: admin-scale-ui
+  namespace: admin-scale-ui-ns
+  cluster:
+    name: default
+    localPath: "${KUBE_CONFIG_PATH:-default}"
+  packageName: Ericsson.spider-app-multi-a-tosca.1.0.29s.1.0.29
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeout: 600
+  aspectToScale: Aspect1
+  stepsToScale: 1
+  extensions:
+    Aspect1: CISMControlled
+    Aspect2: ManualControlled
+    Aspect3: ManualControlled
+    Aspect5: CISMControlled
+  cleanUpResources: false
+  skipVerification: false
+  targets:
+    <vnfInstanceName>-test-cnf: 1
+    <vnfInstanceName>-vnfc1: 1
+    <vnfInstanceName>-vnfc2: 1
+    <vnfInstanceName>-vnfc3: 1
+    <vnfInstanceName>-vnfc4: 1
+    <vnfInstanceName>-2-pm-testapp: 1
+    eric-adp-gs-testapp: 1
+    eric-pm-bulk-reporter: 2
+    eric-pm-server: 1
+    eric-pm-testapp-controller: 1
+    influxdb-service: 1
+  scaleInfo:
+    Aspect1: 1
+    Aspect2: 0
+    Aspect3: 0
+    Aspect5: 1

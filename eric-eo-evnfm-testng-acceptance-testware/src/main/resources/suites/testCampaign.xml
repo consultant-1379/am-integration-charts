@@ -1,0 +1,66 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2024
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="CNF Onboarding TestNg Suite" verbose="10" configfailurepolicy="continue" preserve-order="true">
+
+    <listeners>
+        <listener class-name="com.ericsson.eo.evnfm.acceptance.testng.listeners.EvnfmTestNGListener"/>
+    </listeners>
+
+    <parameter name="testTargetClusterData" value="release-multi/cismCluster/testTargetCluster.yaml"/>
+    <parameter name="packagesToOnboard" value="testCampaign/tcOnboarding.yaml"/>
+    <parameter name="cnfsToInstantiate" value="testCampaign/tcInstantiate.yaml"/>
+    <parameter name="cnfsToUpgrade" value="testCampaign/tcUpgrade.yaml"/>
+    <parameter name="cnfsToScale" value="testCampaign/tcScale.yaml"/>
+    <parameter name="packagesToOnboardUI" value="cnfOnboardingUI.yaml"/>
+
+    <test name="Set up" parallel="none">
+        <classes>
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.cismcluster.BasicClusterTest">
+                <methods>
+                    <include name="testRegisterCluster"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="CNF Onboarding" parallel="none">
+        <classes>
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.OnboardingTests">
+                <methods>
+                    <include name="testOnboardCNFPackage"/>
+                    <include name="testViewDetailsOfAllOnboardedPackages"/>
+                    <include name="testListOnboardedHelmCharts"/>
+                    <include name="testListOnboardedDockerImages"/>
+                    <include name="testRetrieveVnfdOfOnboardedPackages"/>
+                    <include name="testDeleteCsarPackage"/>
+                </methods>
+            </class>
+            <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.lcm.TCLcm">
+                <methods>
+                    <include name="testCreateVnfIdentifier"/>
+                    <include name="EVNFM_LCM_1_testInstantiate"/>
+                    <include name="testQueryCnf"/>
+                    <include name="testUpgrade"/>
+                    <include name="testQueryLcmOperation"/>
+                    <include name="testScale"/>
+                    <include name="testTerminate"/>
+                    <include name="testDeleteVnfIdentifier"/>
+                    <include name="testCleanupCnf"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

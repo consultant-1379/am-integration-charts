@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2024
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.ericsson.orchestration.mgmt</groupId>
+    <artifactId>master</artifactId>
+    <version>3.61.0-1</version>
+    <relativePath/>
+  </parent>
+
+  <artifactId>eric-eo-evnfm</artifactId>
+  <version>2.49.0-13</version>
+  <packaging>pom</packaging>
+
+  <name>Application Manager Integration Chart</name>
+
+  <modules>
+    <module>eric-eo-evnfm-acceptance-testware-steps</module>
+    <module>eric-eo-evnfm-acceptance-testware</module>
+    <module>eric-eo-evnfm-acceptance-testware-internal</module>
+    <module>eric-eo-evnfm-testng-acceptance-testware</module>
+  </modules>
+
+  <properties>
+    <commons-text.version>1.9</commons-text.version>
+    <eric-am-shared.version>0.172.0-1</eric-am-shared.version>
+    <eric-am-onboarding-server-api.version>1.485.0-10</eric-am-onboarding-server-api.version>
+    <eric-vnfm-orchestrator-service-testware.version>0.1091.0-6</eric-vnfm-orchestrator-service-testware.version>
+    <keycloak-admin-client.version>21.1.2</keycloak-admin-client.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-text</artifactId>
+        <version>${commons-text.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ericsson.orchestration.mgmt</groupId>
+        <artifactId>eric-vnfm-orchestrator-service-api</artifactId>
+        <version>${eric-vnfm-orchestrator-service-testware.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ericsson.orchestration.mgmt.packaging</groupId>
+        <artifactId>eric-am-onboarding-server-api</artifactId>
+        <version>${eric-am-onboarding-server-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.ericsson.orchestration.mgmt</groupId>
+        <artifactId>eric-am-shared-vnfd</artifactId>
+        <version>${eric-am-shared.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <profiles>
+    <profile>
+      <id>acceptance</id>
+      <modules>
+        <module>eric-eo-evnfm-acceptance-testware</module>
+      </modules>
+      <properties>
+        <test.source>${project.basedir}/src/main/java</test.source>
+        <test.output>${project.build.directory}/test-classes</test.output>
+      </properties>
+      <build>
+        <testResources>
+          <testResource>
+            <directory>${project.basedir}/src/main/resources</directory>
+          </testResource>
+        </testResources>
+      </build>
+    </profile>
+    <profile>
+      <id>acceptance-testng</id>
+      <modules>
+        <module>eric-eo-evnfm-testng-acceptance-testware</module>
+      </modules>
+      <properties>
+        <test.source>${project.basedir}/src/main/java</test.source>
+        <test.output>${project.build.directory}/test-classes</test.output>
+      </properties>
+      <build>
+        <testResources>
+          <testResource>
+            <directory>${project.basedir}/src/main/resources</directory>
+          </testResource>
+        </testResources>
+      </build>
+    </profile>
+    <profile>
+      <id>checkstyle</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>validate</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <configLocation>./checkstyle.xml</configLocation>
+                  <failOnViolation>true</failOnViolation>
+                  <logViolationsToConsole>true</logViolationsToConsole>
+                  <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>license</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+            <version>3.0</version>
+            <configuration>
+              <header>./license/copyright.txt</header>
+              <properties>
+                <license.year>2024</license.year>
+              </properties>
+              <excludes>
+                <exclude>license/</exclude>
+                <exclude>am-ci-flow/</exclude>
+                <exclude>Scripts/</exclude>
+                <exclude>*.json</exclude>
+                <exclude>**/*.json</exclude>
+                <exclude>**/geckodriver</exclude>
+                <exclude>**/*.config</exclude>
+                <exclude>eo-integration-charts/</exclude>
+                <exclude>**/exclude_rules</exclude>
+                <exclude>**/_helpers.tpl</exclude>
+                <exclude>**/.helmignore</exclude>
+                <exclude>**/*.gotmpl</exclude>
+                <exclude>design/EVNFM_SystemContext.html</exclude>
+                <exclude>charts/eric-eo-evnfm/Chart.yaml</exclude>
+              </excludes>
+              <headerDefinitions>
+                <headerDefinition>./license/javaHeaderDefinition.xml</headerDefinition>
+                <headerDefinition>./license/xmlHeaderDefinition.xml</headerDefinition>
+              </headerDefinitions>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

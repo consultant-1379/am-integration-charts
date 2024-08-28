@@ -1,0 +1,68 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+instantiate:
+  cluster: external_admin
+  namespace: release-test-vnf
+  releaseName: release-test-vnf
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  applicationTimeOut: '270'
+  day0configuration:
+    secretData:
+      name: day0-secret
+      data:
+        login: testlogin
+        password: testpassword
+  configurations:
+    - name: spider-app-file-config
+      verify:
+        - key: config.json
+          attributeKey: config.nbi.file.json.configMap
+        - key: config.conf
+          attributeKey: config.nbi.file.script.configMap
+        - key: config.xml
+          attributeKey: config.nbi.file.xml.configMap
+  additionalAttributesFiles:
+    - src/main/resources/suites/additional-params/instantiate-values-1.yaml
+upgrade:
+  applicationTimeOut: '270'
+  additionalAttributesFiles:
+    - src/main/resources/suites/additional-params/instantiate_values_as_file
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+scale:
+  applicationTimeOut: '270'
+  aspectId: Aspect1
+  deployments:
+    eric-pm-bulk-reporter: '2'
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+rollback:
+  applicationTimeOut: '270'
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+terminate:
+  terminationType: GRACEFUL
+  applicationTimeOut: '270'
+  expectedOperationState: Completed
+customresource:
+  customResourceInfoList:
+    - crdYamlPath: src/main/resources/crd/vnfinstanceresponses-crd.yaml
+      crMetadata:
+        name: vir.phase1.evnfm.test.e2e.bur
+
+

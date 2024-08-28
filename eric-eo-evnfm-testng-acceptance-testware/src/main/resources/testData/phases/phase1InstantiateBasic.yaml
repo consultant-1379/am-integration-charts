@@ -1,0 +1,29 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+cnfToInstantiate:
+  vnfdId: "8eca7b35-72d8-4cab-9fee-138f1c3b9caaa"
+  vnfInstanceName: evnfm-e2e-spider-app-p1
+  vnfInstanceDescription: Basic instantiate for phase 1
+  namespace: evnfm-e2e-spider-app-p1-ns
+  cluster:
+    localPath: "${KUBE_CONFIG_PATH}"
+  expectedOperationState: Completed
+  expectedComponentsState: Running
+  cleanUpResources: true
+  skipVerification: false
+  additionalParams:
+    probesConfig.readinessProbe.delayBeforeReady: 10

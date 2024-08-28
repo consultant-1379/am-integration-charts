@@ -1,0 +1,50 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+tags:
+  onboarding: false
+  wfs: true
+  orchestrator: false
+  ui: false
+
+eric-am-common-wfs:
+  autoConfigureHelm:
+    enabled: false
+  autoConfigureDocker:
+    enabled: true
+  helm:
+    url:
+
+eric-pm-server:
+  enabled: false
+
+definitions:
+  &loggingEnabled false
+
+eric-data-search-engine:
+  enabled: *loggingEnabled
+
+eric-log-shipper:
+  enabled: *loggingEnabled
+
+eric-log-transformer:
+  enabled: *loggingEnabled
+
+eric-data-search-engine-curator:
+  enabled: *loggingEnabled
+
+eric-data-visualizer-kb:
+  enabled: *loggingEnabled

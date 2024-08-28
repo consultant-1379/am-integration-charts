@@ -1,0 +1,97 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2024
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<suite name="E-VNFM Release TestNg Multi Suite" verbose="10" configfailurepolicy="continue" data-provider-thread-count="2">
+
+  <listeners>
+    <listener class-name="com.ericsson.eo.evnfm.acceptance.testng.listeners.EvnfmTestNGListener"/>
+  </listeners>
+
+  <parameter name="certificateManagement" value="release-multi/certificate/certificates.yaml"/>
+  <parameter name="testTargetClusterData" value="release-multi/cismCluster/testTargetCluster.yaml"/>
+  <parameter name="basicOnboardingData" value="release-multi/onboarding.yaml"/>
+  <parameter name="basicLcmDeployableModulesData" value="release-multi/instantiate/basic-lcm-dm.yaml"/>
+  <parameter name="cismClusterData" value="release-multi/cismCluster/cismCluster.yaml"/>
+  <parameter name="rollbackAtFailureData" value="release-multi/rollback/rollbackAtFailure.yaml"/>
+  <parameter name="persistenceOfScalingData" value="release-multi/scale/persistScaleAtUpgrade.yaml"/>
+  <parameter name="cnfScaleData" value="release-multi/scale/scaleCnf.yaml"/>
+  <parameter name="terminateData" value="release-multi/terminate/terminate.yaml"/>
+
+  <test name="Set up" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.postdeployment.CertificateManagementTest"/>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.cismcluster.BasicClusterTest">
+        <methods>
+          <include name="testRegisterCluster"/>
+        </methods>
+      </class>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.BasicOnboardingTest">
+        <methods>
+          <include name="testLicensesAvailable"/>
+          <include name="testHealthCheck"/>
+          <include name="testOnboardCsarREST"/>
+          <include name="testVnfdZipOnboardedCorrectly"/>
+          <include name="testAdditionalValuesArtifacts"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Default Cluster operations" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.cismcluster.DefaultClusterTest">
+        <methods>
+          <include name="registerUpdatePatchDeregisterDefaultCluster"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="End to End Acceptance Tests: Phase 1" parallel="classes" thread-count="THREAD_COUNT">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.lcm.rollback.RollbackAtFailureTest"/><!--11 minutes-->
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.lcm.instantiate.LcmWithDeployableModulesTest"/><!--5 minutes-->
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.lcm.scale.PersistenceOfScalingDataTest"/><!--8 minutes-->
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.lcm.scale.ScaleSuccessTest"/><!--12 minutes-->
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.cismcluster.CISMClusterTest"><!--5 minutes-->
+        <methods>
+          <include name="registerUpdateDeregisterClusterConfigPositiveTest"/>
+          <include name="clusterConfigLifecyclePositiveTest"/>
+          <include name="registerClusterDuplicateNegativeTest"/>
+          <include name="registerInvalidClusterNegativeTest"/>
+          <include name="registerUpdateDeregisterClusterConfigWithNamespacePositiveTest"/>
+          <include name="registerClusterConfigWithNamespaceNegativeTest"/>
+          <include name="clusterConfigLifecycleNegativeTest"/>
+          <include name="updateInvalidClusterNegativeTest"/>
+          <include name="invalidClusterConfigNotExistNegativeTest"/>
+          <include name="updateClusterConfigPositiveTestSkipVerification"/>
+          <include name="modifyClusterConfigPositiveTestSkipVerification"/>
+          <include name="modifyInvalidClusterNegativeTest"/>
+          <include name="modifyNonexistentClusterConfigNegativeTest"/>
+          <include name="modifyWithInvalidClusterConfigDataNegativeTest"/>
+          <include name="clusterConfigLifecycleNegativeOperationFailedTest"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Clean up" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.BasicOnboardingTest">
+        <methods>
+          <include name="testDeletePackageREST"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>

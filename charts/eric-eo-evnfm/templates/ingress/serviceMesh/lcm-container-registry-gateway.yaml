@@ -1,0 +1,88 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+{{- $serviceMesh := include "eric-eo-evnfm.service-mesh-enabled" . | trim -}}
+{{- $serviceMeshIngress := include "eric-eo-evnfm.service-mesh-ingress-enabled" . | trim -}}
+{{- if and (eq $serviceMesh "true") (eq $serviceMeshIngress "true") }}
+    {{- $containerRegEnabled := false -}}
+    {{- $crEnabledKeyExists := false -}}
+    {{- if hasKey .Values "eric-lcm-container-registry" -}}
+        {{- if hasKey (index .Values "eric-lcm-container-registry") "enabled" -}}
+            {{- $containerRegEnabled = index .Values "eric-lcm-container-registry" "enabled" -}}
+            {{- $crEnabledKeyExists = true -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if not $crEnabledKeyExists -}}
+        {{- if hasKey .Values "services" -}}
+            {{- if hasKey .Values.services "onboarding" -}}
+                {{- if hasKey .Values.services.onboarding "enabled" -}}
+                    {{- $containerRegEnabled = .Values.services.onboarding.enabled -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- if $containerRegEnabled -}}
+{{- if index .Values "eric-lcm-container-registry" "ingress" "enabled" }}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ template "eric-eo-evnfm.name" . }}-lcm-container-registry-gateway
+  labels:
+{{ include "eric-lcm-container-registry.labels" . | indent 4 }}
+  annotations:
+    ericsson.com/product-name: "Container Registry"
+    ericsson.com/product-number: "CXC 201 1698"
+    ericsson.com/product-revision: {{ regexReplaceAll "(.*)[+-].*" .Chart.Version "${1}" | quote }}
+{{- if .Values.annotations }}
+{{ toYaml .Values.annotations | indent 4 }}
+{{- end }}
+{{- if index .Values "eric-lcm-container-registry" "ingress" "annotations" }}
+{{ toYaml (index .Values "eric-lcm-container-registry" "ingress" "annotations") | indent 4 }}
+{{- end }}
+spec:
+  selector:
+    app: service-mesh-ingress-gateway
+  servers:
+  - port:
+      number: 80
+      name: http-registry-chart
+      protocol: HTTP
+    hosts:
+      - {{ index .Values "eric-lcm-container-registry" "ingress" "hostname" | quote }}
+  {{- if index .Values "eric-lcm-container-registry" "ingress" "tls" "enabled" }}
+    tls:
+      httpsRedirect: true # sends 301 redirect for http requests
+  - port:
+      name: https-registry-chart
+      number: 443
+      protocol: HTTPS
+    hosts:
+      - {{ index .Values "eric-lcm-container-registry" "ingress" "hostname" | quote }}
+    tls:
+      {{- if index .Values "eric-lcm-container-registry" "ingress" "tls" "passthrough"  }}
+      mode: PASSTHROUGH # Enable Passthrough https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-sni-passthrough/
+      {{- else }}
+      mode: SIMPLE
+      {{- if index .Values "eric-lcm-container-registry" "ingress" "tls" "secretName"  }}
+      credentialName: {{ index .Values "eric-lcm-container-registry" "ingress" "tls" "secretName" | quote }}
+      {{- else }}
+      credentialName: eric-lcm-container-registry-ingress-external-server-cert
+      {{- end }}
+      {{- end }}
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

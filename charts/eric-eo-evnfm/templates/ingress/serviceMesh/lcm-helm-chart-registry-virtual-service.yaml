@@ -1,0 +1,68 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+{{- $serviceMesh := include "eric-eo-evnfm.service-mesh-enabled" . | trim -}}
+{{- $serviceMeshIngress := include "eric-eo-evnfm.service-mesh-ingress-enabled" . | trim -}}
+{{- if and (eq $serviceMesh "true") (eq $serviceMeshIngress "true") }}
+    {{- $helmChartRegEnabled := false -}}
+    {{- $hcrEnabledKeyExists := false -}}
+    {{- if hasKey .Values "eric-lcm-helm-chart-registry" -}}
+        {{- if hasKey (index .Values "eric-lcm-helm-chart-registry") "enabled" -}}
+            {{- $helmChartRegEnabled = index .Values "eric-lcm-helm-chart-registry" "enabled" -}}
+            {{- $hcrEnabledKeyExists = true -}}
+        {{- end -}}
+    {{- end -}}
+    {{- if not $hcrEnabledKeyExists -}}
+        {{- if hasKey .Values "services" -}}
+            {{- if hasKey .Values.services "onboarding" -}}
+                {{- if hasKey .Values.services.onboarding "enabled" -}}
+                    {{- $helmChartRegEnabled = .Values.services.onboarding.enabled -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- if $helmChartRegEnabled -}}
+{{- if index .Values "eric-lcm-helm-chart-registry" "ingress" "enabled" }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ template "eric-eo-evnfm.name" . }}-lcm-helm-chart-registry-virtualservice
+  annotations:
+  {{- include "eric-eo-evnfm.helm-annotations" .| nindent 4 }}
+  labels:
+  {{- include "eric-eo-evnfm.kubernetes-io-info" .| nindent 4 }}
+spec:
+  gateways:
+  - {{ template "eric-eo-evnfm.name" . }}-lcm-helm-chart-registry-gateway
+  hosts:
+  - {{ index .Values "eric-lcm-helm-chart-registry" "ingress" "hostname"  | quote }}
+  http:
+  - name: "main"
+    match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: eric-lcm-helm-chart-registry
+        port:
+          number: {{ index .Values "eric-lcm-helm-chart-registry" "service" "externalPort" }}
+      headers:
+        response:
+          set:
+            Strict-Transport-Security: max-age=31536000; includeSubDomains
+{{- end }}
+{{- end }}
+{{- end }}

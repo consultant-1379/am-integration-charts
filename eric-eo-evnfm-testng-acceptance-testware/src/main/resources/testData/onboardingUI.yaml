@@ -1,0 +1,23 @@
+#
+# COPYRIGHT Ericsson 2024
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+packages:
+  - packageName: "https://arm1s11-eiffel052.eiffel.gic.ericsson.se:8443/nexus/service/local/repositories/evnfm_testing_artifacts/content/helm3/multi/spider-app-multi-b-tosca-uionboard/1.0.2/spider-app-multi-b-tosca-uionboard-1.0.2-imageless.csar"
+    vnfdId: "multi-chart-uionb-xyz3-5g15f7h501"
+    vnfdFile: "spider-app-multi-b-tosca-onboard.yaml"
+    skipImageUpload: true
+    timeOut: 10
+    packageSecurityOption: UNSIGNED

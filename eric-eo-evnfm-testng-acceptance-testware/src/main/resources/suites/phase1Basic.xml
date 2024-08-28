@@ -1,0 +1,52 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2024
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<suite name="Phase 1 TestNg Suite" verbose="10" configfailurepolicy="continue" preserve-order="true">
+
+  <listeners>
+    <listener class-name="com.ericsson.eo.evnfm.acceptance.testng.listeners.EvnfmTestNGListener"/>
+  </listeners>
+
+  <parameter name="testTargetClusterData" value="release-single/cismCluster/testTargetCluster.yaml"/>
+  <parameter name="basicOnboardingData" value="phases/phase1OnboardingBasic.yaml"/>
+  <parameter name="instantiateData" value="phases/phase1InstantiateBasic.yaml"/>
+
+  <test name="Set up" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.cismcluster.BasicClusterTest">
+        <methods>
+          <include name="testRegisterCluster"/>
+        </methods>
+      </class>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.onboarding.BasicOnboardingTest">
+        <methods>
+          <include name="testLicensesAvailable"/>
+          <include name="testHealthCheck"/>
+          <include name="testOnboardCsarRESTPhases"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+  <test name="Instantiate CNF" parallel="none">
+    <classes>
+      <class name="com.ericsson.eo.evnfm.acceptance.testng.tests.rest.evnfmreleaseflow.instantiate.InstantiateRestTest">
+        <methods>
+          <include name="instantiateCNF"/>
+        </methods>
+      </class>
+    </classes>
+  </test>
+</suite>
